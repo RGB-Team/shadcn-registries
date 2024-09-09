@@ -1,22 +1,18 @@
 {
-  "name": "tree-theme",
+  "name": "otp-theme",
   "type": "registry:block",
   "dependencies": [
-    "@tanstack/react-virtual",
-    "use-resize-observer",
-    "lucide-react"
+    "react-otp-input"
   ],
   "devDependencies": [
 
   ],
   "registryDependencies": [
-    "scroll-area",
-    "button",
-    "tree-view-api"
+    "input"
   ],
   "files": [
     {
-      "path": "components/ui/extension/tree-view.tsx",
+      "path": "components/ui/extension/otp-input.tsx",
       "type": "registry:component"
     }
   ],
