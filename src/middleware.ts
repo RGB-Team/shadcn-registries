@@ -9,7 +9,7 @@ export async function middleware(req: NextRequest) {
   const isProtectedRoute = protectedRoutes.includes(path);
   const isPublicRoute = publicRoutes.includes(path);
 
-  const isAuthorized = await getToken({ req })
+  const isAuthorized = await getToken({ req });
 
   // Redirect to /login if the user is not authenticated
   if (isProtectedRoute && !isAuthorized) {
@@ -23,7 +23,6 @@ export async function middleware(req: NextRequest) {
 
   return NextResponse.next();
 }
-
 
 // Routes Middleware should not run on (e.g. images)
 export const config = {

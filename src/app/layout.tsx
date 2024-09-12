@@ -29,11 +29,9 @@ export default function RootLayout({
     <html lang="en">
       <SessionWrapper>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors min-h-screen 2xl:max-w-5xl flex items-center justify-center`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors 2xl:max-w-9xl font-[family-name:var(--font-geist-sans)]`}
         >
-          <Provider>
-            {children}
-          </Provider>
+          <Provider>{children}</Provider>
         </body>
       </SessionWrapper>
     </html>
