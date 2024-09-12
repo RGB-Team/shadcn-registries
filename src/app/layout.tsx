@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Provider } from "@/components/toggle-theme";
+import SessionWrapper from "@/components/session-wrapper";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,11 +27,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <SessionWrapper>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors min-h-screen 2xl:max-w-5xl flex items-center justify-center`}
+        >
+          <Provider>
+            {children}
+          </Provider>
+        </body>
+      </SessionWrapper>
     </html>
   );
 }
