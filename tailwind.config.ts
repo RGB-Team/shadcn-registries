@@ -52,6 +52,15 @@ const config: Config = {
         },
         bylka: "hsl(var(--bylka))",
       },
+      keyframes: {
+        transform: {
+          "0%": { transform: "translateZ(-200px)" },
+          "100%": { transform: "translateZ(200px)" },
+        },
+      },
+      animation: {
+        transform: "transform 5s infinite ease-in-out alternate-reverse",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -59,6 +68,9 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("tailwindcss-3d")({ legacy: true }),
+  ],
 };
 export default config;

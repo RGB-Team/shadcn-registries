@@ -10,6 +10,21 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  .rotate-x-3 {
+    transform: rotateX(3deg);
+  }
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  /* body {
+    transform: perspective(75em) rotateX(0deg) rotateY(0) scale3d(0.98,0.2,0.5) ;
+    box-shadow: rgba(22, 31, 39, 0.42) 0px 60px 123px -25px,
+      rgba(19, 26, 32, 0.08) 0px 35px 75px -35px;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: rgb(213, 220, 226) rgb(213, 220, 226) rgb(184, 194, 204);
+  } */
+
 }
 
 @layer base {
