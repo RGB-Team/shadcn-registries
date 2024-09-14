@@ -8,7 +8,10 @@ import { toast } from "sonner";
 export function CopyButton({
   content,
   slug,
-}: { content: string; slug?: string }) {
+}: {
+  content: string;
+  slug?: string;
+}) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {

@@ -9,8 +9,8 @@ export default function Registries() {
       <div className=" w-full rounded-xl p-3">
         <FilterBar />
       </div>
-      <div className={cn("flex flex-col md:flex-row gap-5 p-3")}>
-        <div className="flex-1 space-y-3">
+      <div className={cn("flex flex-col md:flex-row gap-10 p-3")}>
+        <div className="flex-1 space-y-4">
           {[...Array(30)].map((item, idx) => (
             <RegistryCard key={idx} id={idx} />
           ))}

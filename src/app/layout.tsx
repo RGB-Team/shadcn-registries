@@ -22,11 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <div
-          className={`${geistSans.variable} ${geistMono.variable} antialiased mx-auto 2xl:max-w-7xl font-[family-name:var(--font-geist-sans)]`}
-        >
-          <SiteHeader />
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)]`}
+      >
+        <SiteHeader />
+        <div className={`mx-auto 2xl:max-w-7xl `}>
           <Provider>{children}</Provider>
         </div>
       </body>

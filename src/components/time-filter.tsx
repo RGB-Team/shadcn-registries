@@ -71,11 +71,9 @@ export function TimeFilter({
             selected={date}
             onSelect={setDate}
             numberOfMonths={2}
-            disabled={
-              {
-                after : new Date()
-              }
-            }
+            disabled={{
+              after: new Date(),
+            }}
           />
         </PopoverContent>
       </Popover>

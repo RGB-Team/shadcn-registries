@@ -28,7 +28,7 @@ const frameworks = [
 
 export const FilterBar = () => {
   return (
-    <div className="w-full" >
+    <div className="w-full">
       <div className="hidden md:flex items-start md:items-center justify-end flex-col md:flex-row gap-2">
         <Combobox data={frameworks} />
         <TimeFilter />
@@ -38,7 +38,7 @@ export const FilterBar = () => {
         </Button>
       </div>
       <div className="flex md:hidden flex-col w-full items-start md:items-center gap-2">
-        <div className="flex items-center justify-between w-full" >
+        <div className="flex items-center justify-between w-full">
           <Combobox data={frameworks} />
           <Button size={"sm"} className="gap-1.5 w-fit">
             <FilterIcon className="size-4" />
