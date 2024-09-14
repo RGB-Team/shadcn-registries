@@ -1,57 +1,60 @@
-import { HomeIcon, Package, ScrollText, User } from "lucide-react";
+"use client";
 
-import {
-  Dock,
-  DockIcon,
-  DockItem,
-  DockLabel,
-} from "@/components/ui/motion/dock";
+import Link from "next/link";
+import { Icons } from "../icons";
+import { Balancer } from "react-wrap-balancer";
+import { siteConfig } from "@/config/site-config";
+import { SocialLinks } from "../social-links";
+import { ModeToggle } from "../toggle-theme";
+import { SearchPopOver } from "../search";
+import { Pages } from "@/config/pages-config";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
-const data = [
-  {
-    title: "Home",
-    icon: (
-      <HomeIcon className="h-full w-full text-neutral-600 dark:text-neutral-300" />
-    ),
-    href: "#",
-  },
-  {
-    title: "Products",
-    icon: (
-      <Package className="h-full w-full text-neutral-600 dark:text-neutral-300" />
-    ),
-    href: "#",
-  },
-  {
-    title: "Change Log",
-    icon: (
-      <ScrollText className="h-full w-full text-neutral-600 dark:text-neutral-300" />
-    ),
-    href: "#",
-  },
-  {
-    title: "Profile",
-    icon: (
-      <User className="h-full w-full text-neutral-600 dark:text-neutral-300" />
-    ),
-    href: "#",
-  },
-];
-
-export function NavBar() {
+export const SiteHeader = () => {
+  const pathname = usePathname();
   return (
-    <div className="fixed z-10 bottom-2 left-1/2 max-w-full -translate-x-1/2">
-      <Dock className="items-end pb-3">
-        {data.map((item, idx) => (
-          <DockItem
-            key={idx}
-            className="aspect-square rounded-full bg-gray-200 dark:bg-neutral-800"
-          >
-            <DockLabel>{item.title}</DockLabel>
-            <DockIcon>{item.icon}</DockIcon>
-          </DockItem>
-        ))}
-      </Dock>
-    </div>
+    <header className="w-full top-0 left-0 z-10">
+      {pathname === "/" && <></>}
+      <div className="flex items-center justify-between px-4 py-2 h-12 border-b border-border bg-background">
+        <nav className="mx-auto max-w-screen-2xl flex items-center justify-between w-full">
+          <div className="flex items-center gap-4">
+            <Link href="/" className="flex items-center gap-2 ">
+              <Icons.logo className="h-5 w-5 fill-current" />
+              <Balancer
+                as={"span"}
+                className=" font-bold truncate text-ellipsis "
+              >
+                {siteConfig.name}
+              </Balancer>
+            </Link>
+            {Pages.map((page) => {
+              const isActive = pathname.includes(page.path ?? "");
+              return (
+                page.path && (
+                  <Link
+                    key={page.title}
+                    href={page.path}
+                    className={cn(
+                      "transition-colors text-foreground/70 hidden md:inline-block",
+                      isActive && "text-foreground",
+                    )}
+                  >
+                    {page.title}
+                  </Link>
+                )
+              );
+            })}
+          </div>
+          <div className="flex items-center gap-1 xs:gap-2">
+            <SearchPopOver />
+            <SocialLinks className="hidden xs:flex" />
+            <div className="flex xs:hidden">
+              <ModeToggle />
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
   );
-}
+};

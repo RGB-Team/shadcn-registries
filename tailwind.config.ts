@@ -12,6 +12,8 @@ const config: Config = {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        function: "hsl(var(--shiki-token-function))",
+        string: "hsl(var(--shiki-token-string))",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
@@ -70,7 +72,6 @@ const config: Config = {
   },
   plugins: [
     require("tailwindcss-animate"),
-    require("tailwindcss-3d")({ legacy: true }),
   ],
 };
 export default config;

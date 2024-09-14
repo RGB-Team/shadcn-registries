@@ -1,50 +1,64 @@
-import { Card, CardHeader } from "@ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@ui/card";
 import Link from "next/link";
-import { AspectRatio } from "@ui/aspect-ratio";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
-import { RegistryDrawer } from "./registry-drawer";
+import { cn } from "@lib/utils";
+import { CardMarkdown } from "./markdown-reader";
+import { Avatar, AvatarFallback, AvatarImage } from "@ui/avatar";
+import { badgeVariants } from "./ui/badge";
 
 type RegistryCardProps = {
   id: number;
 };
 
 export const RegistryCard = ({ id }: RegistryCardProps) => {
-  const chosen = id % 2 !== 0;
+  const length = 10;
+  const render = 8;
   return (
-    <RegistryDrawer cardId={id}>
-      <Card
-        className={cn(
-          "rounded-xl relative overflow-hidden",
-          !chosen ? "row-span-1" : "row-span-2",
-        )}
-      >
-        <Link
-          href={`?cardId=${id}`}
-          className="absolute z-[2] top-0 bottom-0 left-0 right-0"
-          scroll={false}
-        />
-        <CardHeader className="p-0 ">
-          {chosen ? (
-            <AspectRatio ratio={1.56395 / 1}>
-              <Image
-                src="https://picsum.photos/seed/picsum/1000/1000"
-                alt="registry"
-                sizes="(min-width: 1024px) 20vw, (min-width: 768px) 25vw, (min-width: 640px) 33vw, (min-width: 475px) 50vw, 100vw"
-                fill
-                loading="lazy"
-                className="object-cover"
-              />
-            </AspectRatio>
-          ) : (
-            <div className=" bg-blue size-20"></div>
-          )}
-        </CardHeader>
-        <div className="absolute bottom-1 w-full flex items-center justify-between px-2 text-white">
-          <p>Jared Palmer</p>
-          <p>15 May 2024</p>
+    <Card
+      className={cn(
+        "rounded-xl relative overflow-hidden col-span-2 py-3 px-3 space-y-3",
+      )}
+    >
+      <Link href={`/registries/${id}`} className="absolute inset-0" ></Link>
+      <div className="w-full flex items-center justify-between px-2 text-primary">
+        <div className="flex items-center gap-2" >
+          <Avatar>
+            <AvatarImage
+              src="https://github.com/shadcn.png"
+              alt="shadcn"
+              height={40}
+              width={40}
+            />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <h4>
+            Shadcn
+          </h4>
         </div>
-      </Card>
-    </RegistryDrawer>
+        <p>3 days ago</p>
+      </div>
+      <CardContent className="relative bg-background rounded-2xl max-h-96 ">
+        <CardMarkdown />
+      </CardContent>
+      <CardFooter className="px-0 pb-0" >
+        <div className="flex items-center gap-2" >
+          {
+            [...Array(render)].map((item, idx)=>(
+              <Link key={idx} href={`?stack=badge${idx}`} className={cn("cursor-pointer" , badgeVariants({
+                variant : "secondary"
+              }))} >
+                Badge {idx}
+              </Link>
+            ))
+          }
+         {
+          length - render > 0 && (
+            <Link href={`/registries/${id}`} className="text-sm" >
+              +{length - render} more
+            </Link>
+          )
+         }
+        </div>
+      </CardFooter>
+    </Card>
   );
 };
