@@ -9,13 +9,13 @@ export default function Registries() {
       <div className=" w-full rounded-xl p-3">
         <FilterBar />
       </div>
-      <div className={cn("flex flex-col md:flex-row gap-10 p-3")}>
+      <div className={cn("flex gap-10 p-3")}>
         <div className="flex-1 space-y-4">
-          {[...Array(30)].map((item, idx) => (
+          {[...Array(10)].map((item, idx) => (
             <RegistryCard key={idx} id={idx} />
           ))}
         </div>
-        <div className="max-w-lg w-full h-30 rounded-xl space-y-4">
+        <div className="hidden lg:block max-w-lg w-full h-30 rounded-xl space-y-4">
           <div className="space-y-1.5">
             <h3 className="text-lg font-semibold">Most Used</h3>
             <div className="flex flex-col gap-y-2">

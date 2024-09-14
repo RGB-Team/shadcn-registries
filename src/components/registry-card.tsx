@@ -20,7 +20,7 @@ export const RegistryCard = ({ id }: RegistryCardProps) => {
       )}
     >
       <Link href={`/registries/${id}`} className="absolute inset-0"></Link>
-      <div className="w-full flex items-center justify-between px-2 text-primary">
+      <div className="w-full flex items-center justify-between px-0 text-primary">
         <div className="flex items-center gap-2">
           <Avatar>
             <AvatarImage
@@ -35,7 +35,7 @@ export const RegistryCard = ({ id }: RegistryCardProps) => {
         </div>
         <p>3 days ago</p>
       </div>
-      <CardContent className="relative bg-background rounded-2xl max-h-96 ">
+      <CardContent className="relative bg-black rounded-2xl max-h-96 px-0 ">
         <CardMarkdown registry={registry} />
       </CardContent>
       <CardFooter className="px-0 pb-0">

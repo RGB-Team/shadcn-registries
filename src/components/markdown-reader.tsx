@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { CopyButton } from "./copy-button";
 import { ShareButton } from "./share-button";
 import React from "react";
+import dynamic from "next/dynamic";
+import { useTheme } from "next-themes";
 
 const markdown = `
 # Welcome to Markdown
@@ -197,33 +199,32 @@ export const MarkDownReader = () => {
   );
 };
 
-import dynamic from "next/dynamic";
-
-const ReactJson = dynamic(
-  () => import("react-json-view"),
-  { ssr: false }
-)
+const ReactJson = dynamic(() => import("react-json-view"), {
+  ssr: false,
+  loading: () => <p>loading...</p>,
+});
 
 type CardMarkdownProps = {
   registry: any;
 };
 
 export const CardMarkdown = ({ registry }: CardMarkdownProps) => {
+  const { theme } = useTheme();
   return (
-    <ScrollArea className="h-96 group">
-      <div className="bg-muted rounded-xl group">
+    <ScrollArea className="h-96 rounded-xl group">
+      <div className="rounded-xl group">
         <ReactJson
           src={registry}
           theme="monokai"
           enableClipboard
           style={{
             padding: "8px",
-            backgroundColor: "transparent",
+            borderRadius: "12px",
           }}
         />
       </div>
       <div className="absolute bottom-1 right-3 group-hover:flex items-center gap-2 hidden">
-        <CopyButton content={registry} />
+        <CopyButton content={JSON.stringify(registry)} />
         <ShareButton slug={"/registries"} />
       </div>
     </ScrollArea>

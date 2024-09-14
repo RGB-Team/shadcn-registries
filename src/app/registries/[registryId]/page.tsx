@@ -4,6 +4,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@ui/tabs";
 import { GitHubLogoIcon, Link1Icon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { JsonPreview } from "@components/json-preview";
+import { CopyButton } from "@/components/copy-button";
+import { CopyWrapper } from "@/components/copy-wrapper";
 
 type RegistryIdPgeProps = {
   params: {
@@ -70,13 +72,15 @@ export default function RegistryIdPage({
           <div className="space-y-8">
             <div className="space-y-2">
               <h3 className="">Installation Command</h3>
-              <div className="">
-                <code className="text-sm rounded px-[0.3rem] py-3 bg-muted font-mono space-x-2">
-                  <span className="text-function">npx</span>
-                  <span className="text-string">
-                    shadcn@latest http://localhost:3000/registry.json
-                  </span>
-                </code>
+              <div className="w-full">
+                <CopyWrapper content="shadcn@latest add http://localhost:3000/registry.json">
+                  <code className="relative w-full text-sm rounded px-[0.5rem] py-3 bg-muted font-mono space-x-2 group cursor-pointer">
+                    <span className="text-function">npx</span>
+                    <span className="text-string truncate">
+                      shadcn@latest add http://localhost:3000/registry.json
+                    </span>
+                  </code>
+                </CopyWrapper>
               </div>
             </div>
             <div className="space-y-1.5">

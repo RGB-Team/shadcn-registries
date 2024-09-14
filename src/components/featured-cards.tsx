@@ -18,7 +18,10 @@ export const FeaturedCards = () => {
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <div className="space-y-1.5 ">
-            <CardTitle> Magic Ui registry as a full theme </CardTitle>
+            <CardTitle className="w-full truncate">
+              {" "}
+              Magic Ui registry as a full theme{" "}
+            </CardTitle>
             <div className="flex items-center gap-2">
               {[...Array(3)].map((item, idx) => (
                 <Badge key={idx}>radix ui</Badge>
