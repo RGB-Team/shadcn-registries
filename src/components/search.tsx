@@ -87,35 +87,29 @@ export const SearchPopOver = () => {
       </Button>
       <Credenza open={isOpen} onOpenChange={setIsOpen}>
         <CredenzaContent className="overflow-hidden p-0">
-          <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+          <Command>
             <CommandInput
               placeholder="Search registry..."
               value={query}
               onValueChange={handleSearch}
+              className="h-9"
             />
             <CommandList>
-              <CommandEmpty className={cn("py-6 text-center text-sm")}>
-                No documents found.
-              </CommandEmpty>
-              <CommandGroup
-                className="capitalize block md:hidden"
-                heading="Pages"
-              >
-                {Pages.map(
-                  (page) =>
-                    page.path && (
-                      <CommandItem
-                        key={page.path}
-                        onSelect={() =>
-                          handleSelect(() => router.push(`${page.path}`))
-                        }
-                        className=" text-sm rounded-lg cursor-pointer h-9 "
-                      >
-                        <FileIcon className="w-4 h-4" />
-                        <span className="ml-2">{page.title}</span>
-                      </CommandItem>
-                    ),
-                )}
+              <CommandEmpty>No item found.</CommandEmpty>
+              <CommandGroup>
+                {Pages.map((item) => (
+                  <CommandItem
+                    key={item.title}
+                    value={item.title}
+                    onSelect={() => {
+                      handleSelect(() =>
+                        router.push(`/registries/${item.title}`),
+                      );
+                    }}
+                  >
+                    {item.title}
+                  </CommandItem>
+                ))}
               </CommandGroup>
               <CommandGroup className="block md:hidden" heading="Theme">
                 <CommandItem className="rounded-lg cursor-pointer h-9">

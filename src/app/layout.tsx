@@ -3,7 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Provider } from "@components/toggle-theme";
 import { SiteHeader } from "@components/layout/navigation-bar";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@components/ui/sonner";
+import { ReactQueryWrapper } from "@components/react-query-wrapper";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,16 +23,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)]`}
-      >
-        <Provider>
-          <SiteHeader />
-          <div className={`mx-auto 2xl:max-w-7xl `}>{children}</div>
-          <Toaster />
-        </Provider>
-      </body>
-    </html>
+    <ReactQueryWrapper>
+      <html lang="en">
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)]`}
+        >
+          <Provider>
+            <SiteHeader />
+            <div className={`mx-auto 2xl:max-w-7xl `}>{children}</div>
+            <Toaster />
+          </Provider>
+        </body>
+      </html>
+    </ReactQueryWrapper>
   );
 }

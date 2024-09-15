@@ -9,11 +9,11 @@ import { toast } from "sonner";
 export function CopyButton({
   content,
   slug,
-  className
+  className,
 }: {
   content: string;
   slug?: string;
-  className ?:string
+  className?: string;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -32,7 +32,10 @@ export function CopyButton({
   return (
     <button
       onClick={handleCopy}
-      className={cn("text-xs bg-black text-white dark:bg-white dark:text-black p-2 rounded-full size-9 flex items-center justify-center" , className)}
+      className={cn(
+        "text-xs bg-black text-white dark:bg-white dark:text-black p-2 rounded-full size-9 flex items-center justify-center",
+        className,
+      )}
       type="button"
     >
       {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}

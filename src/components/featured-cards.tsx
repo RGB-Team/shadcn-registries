@@ -2,6 +2,7 @@ import { Card, CardContent, CardTitle } from "@ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@ui/avatar";
 import { Badge } from "./ui/badge";
 import Link from "next/link";
+import { getPaginatedRegistries } from "@/db";
 
 export const FeaturedCards = () => {
   return (
@@ -31,5 +32,33 @@ export const FeaturedCards = () => {
         </CardContent>
       </Card>
     </Link>
+  );
+};
+
+export const MostUsed = async () => {
+  const most_used = await getPaginatedRegistries("1", "5");
+  return (
+    <div className="space-y-1.5">
+      <h3 className="text-lg font-semibold">Most Used</h3>
+      <div className="flex flex-col gap-y-2">
+        {most_used.data.map((item, idx) => (
+          <FeaturedCards key={idx * 20} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export const RecentlyAdded = async () => {
+  const most_used = await getPaginatedRegistries("1", "5");
+  return (
+    <div className="space-y-1.5">
+      <h3 className="text-lg font-semibold">Recently Added</h3>
+      <div className="flex flex-col gap-y-2">
+        {most_used.data.map((item, idx) => (
+          <FeaturedCards key={idx * 20} />
+        ))}
+      </div>
+    </div>
   );
 };

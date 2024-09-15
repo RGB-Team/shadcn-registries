@@ -8,50 +8,8 @@ import { CopyButton } from "./copy-button";
 import { ShareButton } from "./share-button";
 import React from "react";
 import dynamic from "next/dynamic";
-import { useTheme } from "next-themes";
-
-const markdown = `
-# Welcome to Markdown
-
-Markdown is a lightweight markup language that you can use to add formatting elements to plaintext text documents.
-
-## How to use this?
-
-1. Write markdown in the markdown editor window
-2. See the rendered markdown in the preview window
-
-### Features
-
-- Create headings, paragraphs, links, blockquotes, inline-code, code blocks, and lists
-- Name and save the document to access again later
-- Choose between Light or Dark mode depending on your preference
-
-> This is an example of a blockquote. If you would like to learn more about markdown syntax, you can visit this [markdown cheatsheet](https://www.markdownguide.org/cheat-sheet/).
-
-#### Headings
-
-To create a heading, add the hash sign (#) before the heading. The number of number signs you use should correspond to the heading level. You'll see in this guide that we've used all six heading levels (not necessarily in the correct way you should use headings!) to illustrate how they should look.
-
-##### Lists
-
-You can see examples of ordered and unordered lists above.
-###### Ordered checklist
-1. [ ] This is an unchecked list item
-2. [X] This is checked list item
-###### Unordered checklist
-- [ ] This is an unchecked list item
-- [X] This is checked list item
-
-##### Tables
-
-| Heading | A | B | C |
-| :-: | -: | :- | - |
-| Cell 1 | Cell 2 | Cell 3 | Cell 4 |
-
-###### Code Blocks
-
-This markdown editor allows for inline-code snippets, like this: \`<p>I'm inline</p>\`. It also allows for larger code blocks like this
-`;
+import { Skeleton } from "@ui/skeleton";
+import axios from "axios";
 
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -186,8 +144,28 @@ const components = {
   ),
 };
 
-export const MarkDownReader = () => {
-  return (
+type MarkDownReaderProps = {
+  url: string;
+};
+
+export const MarkDownReader = ({ url }: MarkDownReaderProps) => {
+  const [loading, setLoading] = React.useState(false);
+  const [markdown, setMarkDown] = React.useState();
+
+  React.useEffect(() => {
+    const fetchMarkDown = async () => {
+      setLoading(true);
+      const markdown_code = await axios.get(url);
+      setMarkDown(markdown_code.data);
+      setLoading(false);
+    };
+
+    fetchMarkDown();
+  }, [url]);
+
+  return loading ? (
+    <Skeleton className="h-96 bg-muted" />
+  ) : (
     <ReactMarkdown
       linkTarget="_blank"
       remarkPlugins={[gfm]}
@@ -201,16 +179,28 @@ export const MarkDownReader = () => {
 
 const ReactJson = dynamic(() => import("react-json-view"), {
   ssr: false,
-  loading: () => <p>loading...</p>,
+  loading: () => <Skeleton className="max-h-96 bg-muted" />,
 });
 
-type CardMarkdownProps = {
-  registry: any;
-};
+type CardMarkdownProps = MarkDownReaderProps;
 
-export const CardMarkdown = ({ registry }: CardMarkdownProps) => {
-  const { theme } = useTheme();
-  return (
+export const CardMarkdown = ({ url }: CardMarkdownProps) => {
+  const [loading, setLoading] = React.useState(false);
+  const [registry, setRegistry] = React.useState<any>();
+
+  React.useEffect(() => {
+    const fetchRegistry = async () => {
+      setLoading(true);
+      const registry_code = await axios.get(url);
+      setRegistry(registry_code.data);
+      setLoading(false);
+    };
+
+    fetchRegistry();
+  }, [url]);
+  return loading ? (
+    <Skeleton className="h-96 bg-muted" />
+  ) : (
     <ScrollArea className="h-96 rounded-xl group">
       <div className="rounded-xl group">
         <ReactJson

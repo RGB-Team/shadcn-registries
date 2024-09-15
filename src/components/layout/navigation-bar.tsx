@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 export const SiteHeader = () => {
   const pathname = usePathname();
   return (
-    <header className="w-full top-0 left-0 z-10">
+    <header className="sticky w-full top-0 left-0 z-10">
       {pathname === "/" && <></>}
       <div className="flex items-center justify-between px-4 py-2 h-12 border-b border-border bg-background">
         <nav className="mx-auto max-w-screen-2xl flex items-center justify-between w-full">
