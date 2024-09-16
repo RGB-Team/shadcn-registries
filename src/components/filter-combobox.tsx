@@ -68,7 +68,7 @@ export function FilterCombobox({ tags }: FilterComboboxProps) {
             <MultiSelectorContent>
               <MultiSelectorList className="border-none p-0 bg-transparent shadow-none">
                 {tags.map((tag) => (
-                  <MultiSelectorItem value={tag} className="h-9 text-sm">
+                  <MultiSelectorItem key={`filter-item-${tag}`} value={tag} className="h-9 text-sm">
                     {tag}
                   </MultiSelectorItem>
                 ))}

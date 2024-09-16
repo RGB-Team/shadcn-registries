@@ -21,6 +21,7 @@ import { getPaginatedSearch } from "@/db";
 import { FuseResult } from "fuse.js";
 import { RegistriesType } from "@/db/registries/registries";
 import { Skeleton } from "./ui/skeleton";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export const SearchPopOver = () => {
   const router = useRouter();
@@ -134,28 +135,36 @@ export const SearchPopOver = () => {
                       <CommandItem
                         key={registry.title}
                         value={registry.title}
-                        className="flex flex-col gap-y-1 items-start"
+                        className="flex gap-2 items-center"
                         onSelect={() => {
                           handleSelect(() =>
                             router.push(`/registries/${registry.slug}`),
                           );
                         }}
                       >
-                        <h3 className="text-sm capitalize">{registry.title}</h3>
-                        <p className="text-gray-400 text-sm">
-                          {registry.searchDescription}
-                        </p>
+                        <Avatar className="size-10" >
+                          <AvatarImage
+                            src={registry.authors[0].avatar}
+                            alt={registry.authors[0].name}
+                            height={40}
+                            width={40}
+                            className="rounded-xl"
+                          />
+                          <AvatarFallback>{registry.authors[0].name.slice(0, 3)}</AvatarFallback>
+                        </Avatar>
+                        <div  className="flex flex-col gap-y-1 items-start">
+                          <h3 className="text-sm capitalize">{registry.title}</h3>
+                          <p className="text-gray-400 text-sm truncate max-w-full ">
+                            {registry.searchDescription}
+                          </p>
+                        </div>
                       </CommandItem>
                     );
                   })}
                 </CommandGroup>
               )}
 
-              <CommandGroup className="block sm:hidden" heading="Theme">
-                <CommandItem className="rounded-lg cursor-pointer h-9">
-                  <ModeToggle isDesktop={false} />
-                </CommandItem>
-              </CommandGroup>
+
             </CommandList>
           </Command>
         </CredenzaContent>
