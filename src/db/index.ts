@@ -1,5 +1,5 @@
 import { Registries } from "./registries/registries";
-import Fuse from "fuse.js";
+import Fuse, { FuseOptionKey } from "fuse.js";
 
 export const getSingleRegistry = (registryId: string) => {
   const registry = Registries.find((registry) => registry.slug === registryId);
@@ -7,7 +7,15 @@ export const getSingleRegistry = (registryId: string) => {
   return registry;
 };
 
-export const getPaginatedRegistries = (page: string, limit: string = "10") => {
+export const getRecentlyAdded = () => {
+  return Registries.reverse().slice(0, 5);
+};
+
+export const getPaginatedRegistries = (
+  page: string,
+  limit: string = "10",
+  searchParams?: string[],
+) => {
   const pageNumber = parseInt(page, 10);
   const limitNumber = parseInt(limit, 10);
 
@@ -18,7 +26,14 @@ export const getPaginatedRegistries = (page: string, limit: string = "10") => {
   const startIndex = (pageNumber - 1) * limitNumber;
   const endIndex = startIndex + limitNumber;
 
-  const paginatedRegistries = Registries.slice(startIndex, endIndex);
+  const targetRegistries =
+    searchParams && searchParams?.length > 0
+      ? Registries.filter((reg) =>
+          searchParams.every((param) => reg.tags.includes(param)),
+        )
+      : Registries;
+
+  const paginatedRegistries = targetRegistries.slice(startIndex, endIndex);
 
   return {
     data: paginatedRegistries,
@@ -30,7 +45,9 @@ export const getPaginatedRegistries = (page: string, limit: string = "10") => {
 };
 
 const fuseConfig = {
-  keys: ["title", "authors.name"],
+  findAllMatches: true,
+  useExtendedSearch: true,
+  keys: ["title", "authors.name", "searchDescription", "tags"],
 };
 
 const fuseInstance = new Fuse(Registries, fuseConfig);

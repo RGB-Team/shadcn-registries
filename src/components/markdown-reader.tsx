@@ -10,6 +10,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { Skeleton } from "@ui/skeleton";
 import axios from "axios";
+import { RegistriesType, Registry } from "@/db/registries/registries";
 
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -172,7 +173,7 @@ export const MarkDownReader = ({ url }: MarkDownReaderProps) => {
       className="p-2 pb-3"
       components={components}
     >
-      {markdown}
+      {markdown ?? ("" as string)}
     </ReactMarkdown>
   );
 };
@@ -182,22 +183,25 @@ const ReactJson = dynamic(() => import("react-json-view"), {
   loading: () => <Skeleton className="max-h-96 bg-muted" />,
 });
 
-type CardMarkdownProps = MarkDownReaderProps;
+type CardMarkdownProps = {
+  lib: Registry;
+  id: string;
+};
 
-export const CardMarkdown = ({ url }: CardMarkdownProps) => {
+export const CardMarkdown = ({ lib, id }: CardMarkdownProps) => {
   const [loading, setLoading] = React.useState(false);
   const [registry, setRegistry] = React.useState<any>();
 
   React.useEffect(() => {
     const fetchRegistry = async () => {
       setLoading(true);
-      const registry_code = await axios.get(url);
+      const registry_code = await axios.get(lib.github_registry);
       setRegistry(registry_code.data);
       setLoading(false);
     };
 
     fetchRegistry();
-  }, [url]);
+  }, [lib]);
   return loading ? (
     <Skeleton className="h-96 bg-muted" />
   ) : (
@@ -213,9 +217,17 @@ export const CardMarkdown = ({ url }: CardMarkdownProps) => {
           }}
         />
       </div>
-      <div className="absolute bottom-1 right-3 group-hover:flex items-center gap-2 hidden">
-        <CopyButton content={JSON.stringify(registry)} />
-        <ShareButton slug={"/registries"} />
+      <div className="absolute top-2 right-3 group-hover:flex flex-col items-center gap-2 hidden">
+        <ShareButton slug={`/registries/${id}`} />
+        <CopyButton
+          icon={"Terminal"}
+          content={"npx shadcn@latest " + lib.github_registry}
+        />
+        <CopyButton
+          toastMessage={"Copied to clipboard. Paste it, run it and enjoy."}
+          content={lib.github_registry}
+          slug={id}
+        />
       </div>
     </ScrollArea>
   );

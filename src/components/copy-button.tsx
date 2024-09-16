@@ -5,15 +5,20 @@ import { Check, Copy } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Icons } from "./icons";
 
 export function CopyButton({
   content,
   slug,
   className,
+  icon,
+  toastMessage,
 }: {
   content: string;
   slug?: string;
   className?: string;
+  icon?: keyof typeof Icons;
+  toastMessage?: string;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -21,14 +26,15 @@ export function CopyButton({
     navigator.clipboard.writeText(content);
     setCopied(true);
     toast(
-      "Copied to clipboard. Use the pkg manager command of your choice to install the registry.",
+      toastMessage ??
+        "Copied to clipboard. Use the pkg manager command of your choice to install the registry.",
     );
 
     setTimeout(() => {
       setCopied(false);
     }, 1000);
   };
-
+  const CustomCopy = Icons[icon ?? "Copy"];
   return (
     <button
       onClick={handleCopy}
@@ -38,7 +44,11 @@ export function CopyButton({
       )}
       type="button"
     >
-      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+      {copied ? (
+        <Check className="w-4 h-4" />
+      ) : (
+        <CustomCopy className="w-4 h-4" />
+      )}
     </button>
   );
 }

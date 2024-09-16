@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Share } from "lucide-react";
+import { Check, Link } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -23,7 +23,7 @@ export function ShareButton({ slug }: { slug: string }) {
       className="text-xs bg-black text-white dark:bg-white dark:text-black p-2 rounded-full size-9 flex items-center justify-center"
       type="button"
     >
-      {copied ? <Check className="w-4 h-4" /> : <Share className="w-4 h-4" />}
+      {copied ? <Check className="w-4 h-4" /> : <Link className="w-4 h-4" />}
     </button>
   );
 }

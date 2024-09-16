@@ -7,20 +7,28 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import { useCallback, useEffect, useState } from "react";
-import { cn, isMacOs } from "@/lib/utils";
+} from "@components/ui/command";
+import { useCallback, useEffect, useState, useTransition } from "react";
+import { cn, isMacOs } from "@lib/utils";
 import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { FileIcon, Search } from "lucide-react";
 import { Credenza, CredenzaContent } from "@ui/credenza";
 import { ModeToggle } from "./toggle-theme";
 import { Pages } from "@/config/pages-config";
+import { useDebounce } from "@hooks/use-debounce";
+import { getPaginatedSearch } from "@/db";
+import { FuseResult } from "fuse.js";
+import { RegistriesType } from "@/db/registries/registries";
+import { Skeleton } from "./ui/skeleton";
 
 export const SearchPopOver = () => {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [results, setResult] = useState<FuseResult<RegistriesType>[] | null>();
+  const debouncedQuery = useDebounce(query, 500);
   const [mounted, setMounted] = useState(false);
   const isMac = isMacOs();
   useEffect(() => {
@@ -51,6 +59,17 @@ export const SearchPopOver = () => {
   const handleSearch = (query: string) => {
     setQuery(query);
   };
+
+  useEffect(() => {
+    if (debouncedQuery.length === 0) setResult(null);
+
+    if (debouncedQuery.length > 0) {
+      startTransition(async () => {
+        const results = await getPaginatedSearch(debouncedQuery);
+        setResult(results);
+      });
+    }
+  }, [debouncedQuery]);
 
   useEffect(() => {
     if (!isOpen) setQuery("");
@@ -92,26 +111,47 @@ export const SearchPopOver = () => {
               placeholder="Search registry..."
               value={query}
               onValueChange={handleSearch}
-              className="h-9"
             />
             <CommandList>
-              <CommandEmpty>No item found.</CommandEmpty>
-              <CommandGroup>
-                {Pages.map((item) => (
-                  <CommandItem
-                    key={item.title}
-                    value={item.title}
-                    onSelect={() => {
-                      handleSelect(() =>
-                        router.push(`/registries/${item.title}`),
-                      );
-                    }}
-                  >
-                    {item.title}
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-              <CommandGroup className="block md:hidden" heading="Theme">
+              <CommandEmpty
+                className={cn(
+                  isPending ? "hidden" : "py-6 text-center text-sm",
+                )}
+              >
+                No products found.
+              </CommandEmpty>
+              {isPending ? (
+                <div className="space-y-1 overflow-hidden px-1 py-2">
+                  <Skeleton className="h-4 w-10 rounded" />
+                  <Skeleton className="h-8 rounded-sm" />
+                  <Skeleton className="h-8 rounded-sm" />
+                </div>
+              ) : (
+                <CommandGroup className="space-y-2">
+                  {results?.map((item) => {
+                    const registry = item.item;
+                    return (
+                      <CommandItem
+                        key={registry.title}
+                        value={registry.title}
+                        className="flex flex-col gap-y-1 items-start"
+                        onSelect={() => {
+                          handleSelect(() =>
+                            router.push(`/registries/${registry.slug}`),
+                          );
+                        }}
+                      >
+                        <h3 className="text-sm capitalize">{registry.title}</h3>
+                        <p className="text-gray-400 text-sm">
+                          {registry.searchDescription}
+                        </p>
+                      </CommandItem>
+                    );
+                  })}
+                </CommandGroup>
+              )}
+
+              <CommandGroup className="block sm:hidden" heading="Theme">
                 <CommandItem className="rounded-lg cursor-pointer h-9">
                   <ModeToggle isDesktop={false} />
                 </CommandItem>
