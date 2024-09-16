@@ -1,19 +1,13 @@
-"use client";
-
-import { Card, CardContent, CardFooter, CardHeader } from "@ui/card";
+import { Card, CardContent, CardFooter } from "@ui/card";
 import Link from "next/link";
 import { cn } from "@lib/utils";
 import { CardMarkdown } from "./markdown-reader";
 import { Avatar, AvatarFallback, AvatarImage } from "@ui/avatar";
-import { Badge, badgeVariants } from "./ui/badge";
 import { RegistriesType } from "@/db/registries/registries";
-import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import {
   subMinutes,
   subHours,
-  subDays,
-  subWeeks,
   subMonths,
   subYears,
   differenceInMinutes,
@@ -22,6 +16,8 @@ import {
   differenceInMonths,
   differenceInYears,
 } from "date-fns";
+import { FilterTags } from "./filter-tags";
+import { Skeleton } from "@ui/skeleton";
 
 type RegistryCardProps = {
   registry: RegistriesType;
@@ -32,23 +28,6 @@ const render = 4;
 export const RegistryCard = ({ registry }: RegistryCardProps) => {
   const length = registry.tags.length;
   const leftAuthor = registry.authors.length - 5;
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const handleTagClick = (tag: string) => {
-    const currentParams = new URLSearchParams(searchParams.toString());
-    const currentStacks = currentParams.getAll("stack");
-
-    if (currentStacks.includes(tag)) {
-      const updatedStacks = currentStacks.filter((t) => t !== tag);
-      currentParams.delete("stack");
-      updatedStacks.forEach((t) => currentParams.append("stack", t));
-    } else {
-      currentParams.append("stack", tag);
-    }
-    const newUrl = `?${currentParams.toString()}`;
-    router.push(newUrl);
-  };
 
   const formatPassedTime = (date: Date) => {
     const now = new Date();
@@ -104,20 +83,13 @@ export const RegistryCard = ({ registry }: RegistryCardProps) => {
       <CardFooter className="flex justify-between px-0 py-2">
         <div className="relative">
           <div className="flex items-center gap-2">
-            {registry.tags.slice(0, render).map((tag, idx) => (
-              <Badge
-                key={idx}
-                variant={
-                  searchParams.getAll("stack").includes(tag)
-                    ? "default"
-                    : "secondary"
-                }
-                className={cn("cursor-pointer hover:z-[10] ")}
-                onClick={() => handleTagClick(tag)}
-              >
-                {tag}
-              </Badge>
-            ))}
+            <Suspense
+              fallback={[...Array(2)].map((_, idx) => (
+                <Skeleton className="h-8 rounded-lg" key={`${idx}tag`} />
+              ))}
+            >
+              <FilterTags tags={registry.tags.slice(0, render)} />
+            </Suspense>
             {length - render > 0 && (
               <Link href={`/registries/${registry.slug}`} className="text-sm">
                 +{length - render} more

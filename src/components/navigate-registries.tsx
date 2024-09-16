@@ -24,7 +24,7 @@ export const NavigateRegistries = ({
     threshold: 1,
   });
 
-  const { status, data, isFetchingNextPage, fetchNextPage , refetch } =
+  const { status, data, isFetchingNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
       queryKey: ["registries"],
       queryFn: async ({ pageParam }) => {
@@ -45,9 +45,9 @@ export const NavigateRegistries = ({
     }
   }, [entry, fetchNextPage]);
 
-  useEffect(()=> {
+  useEffect(() => {
     refetch();
-  } , [searchParams])
+  }, [searchParams]);
 
   if (status === "pending")
     return [...Array(2)].map((_, idx) => (
