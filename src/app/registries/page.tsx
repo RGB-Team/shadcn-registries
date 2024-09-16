@@ -25,7 +25,7 @@ export default async function RegistriesPage({
       <div className=" w-full rounded-lg px-6">
         <FilterBar />
       </div>
-      <div className={cn("flex gap-10 px-10")}>
+      <div className={cn("flex gap-10 px-6 md:px-10")}>
         <div className="flex-1 space-y-4">
           <Suspense
             fallback={[...Array(2)].map((_, idx) => (

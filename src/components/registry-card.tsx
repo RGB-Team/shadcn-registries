@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, CardContent, CardFooter } from "@ui/card";
 import Link from "next/link";
 import { cn } from "@lib/utils";
@@ -6,24 +8,22 @@ import { Avatar, AvatarFallback, AvatarImage } from "@ui/avatar";
 import { RegistriesType } from "@/db/registries/registries";
 import React, { Suspense } from "react";
 import {
-  subMinutes,
-  subHours,
-  subMonths,
-  subYears,
   differenceInMinutes,
   differenceInHours,
   differenceInDays,
   differenceInMonths,
   differenceInYears,
+  subDays,
 } from "date-fns";
 import { FilterTags } from "./filter-tags";
 import { Skeleton } from "@ui/skeleton";
+import { useMediaQuery } from "@hooks/use-media-query";
 
 type RegistryCardProps = {
   registry: RegistriesType;
 };
 
-const render = 4;
+const mobile = "(max-width: 640px)";
 
 export const RegistryCard = ({ registry }: RegistryCardProps) => {
   const length = registry.tags.length;
@@ -32,15 +32,16 @@ export const RegistryCard = ({ registry }: RegistryCardProps) => {
   const formatPassedTime = (date: Date) => {
     const now = new Date();
 
-    // Calculate time differences in various units
-    const minutes = differenceInMinutes(
-      subMinutes(now, date.getMinutes()),
-      date,
-    );
-    const hours = differenceInHours(subHours(now, date.getHours()), date);
+    // Calculate time differences using subDays and other subtraction functions
+    const daysAgo = subDays(now, differenceInDays(now, date));
+
+    const minutes = differenceInMinutes(now, date);
+    const hours = differenceInHours(now, date);
     const days = differenceInDays(now, date);
-    const months = differenceInMonths(subMonths(now, date.getMonth()), date);
-    const years = differenceInYears(subYears(now, date.getFullYear()), date);
+    const months = differenceInMonths(now, date);
+    const years = differenceInYears(now, date);
+
+    console.log(minutes, hours, days, months, years);
 
     // Determine the appropriate time unit and format the string
     let timeUntilString = "";
@@ -61,6 +62,8 @@ export const RegistryCard = ({ registry }: RegistryCardProps) => {
     return timeUntilString;
   };
 
+  const isMobile = useMediaQuery(mobile);
+  const render = isMobile ? 3 : 4;
   return (
     <Card
       className={cn(

@@ -71,6 +71,9 @@ importers:
       cmdk:
         specifier: 1.0.0
         version: 1.0.0(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      command:
+        specifier: ^0.0.5
+        version: 0.0.5
       date-fns:
         specifier: ^3.6.0
         version: 3.6.0
@@ -1246,6 +1249,9 @@ packages:
   comma-separated-tokens@2.0.3:
     resolution: {integrity: sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==}
 
+  command@0.0.5:
+    resolution: {integrity: sha512-D3ahqZifhRQODzFluhUSaHCvukc9/WsEboceAVugj/uoG1eE1h9ZR+jJ+YtoyOmXOOq5AijdYYeXhYvUPa7f/w==}
+
   commander@4.1.1:
     resolution: {integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==}
     engines: {node: '>= 6'}
@@ -2022,6 +2028,9 @@ packages:
 
   mdast-util-to-string@3.2.0:
     resolution: {integrity: sha512-V4Zn/ncyN1QNSqSBxTrMOLpjr+IKdHl2v3KVLoWmDPscP4r9GcCi71gjgvUV1SFSKh92AjAG4peFuBl2/YgCJg==}
+
+  merge-recursive@0.0.3:
+    resolution: {integrity: sha512-WPyS8iu5hcexWNQxFO9lbpvB1lRDn+3hOZXXrD7kLwVrC8+4CKdL7rW7Rrxlmf5V/ySnpZRk2Moo6VAxb4lAeA==}
 
   merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
@@ -2905,6 +2914,10 @@ packages:
   which-typed-array@1.1.15:
     resolution: {integrity: sha512-oV0jmFtUky6CXfkqehVvBP/LSWJ2sy4vWMioiENyJLePrBO/yKyV9OyJySfAKosh+RYkIl5zJCNZ8/4JncrpdA==}
     engines: {node: '>= 0.4'}
+
+  which@1.0.5:
+    resolution: {integrity: sha512-p82w9e3628Y1sCI41PbzZb5Qbacst2Yt/gE4mtqrNXv65SmwNbAcQvS4VkehtqmclAcOh36tgQiwhg6fKvkyDA==}
+    hasBin: true
 
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
@@ -4035,6 +4048,11 @@ snapshots:
 
   comma-separated-tokens@2.0.3: {}
 
+  command@0.0.5:
+    dependencies:
+      merge-recursive: 0.0.3
+      which: 1.0.5
+
   commander@4.1.1: {}
 
   concat-map@0.0.1: {}
@@ -5035,6 +5053,8 @@ snapshots:
   mdast-util-to-string@3.2.0:
     dependencies:
       '@types/mdast': 3.0.15
+
+  merge-recursive@0.0.3: {}
 
   merge2@1.4.1: {}
 
@@ -6117,6 +6137,8 @@ snapshots:
       for-each: 0.3.3
       gopd: 1.0.1
       has-tostringtag: 1.0.2
+
+  which@1.0.5: {}
 
   which@2.0.2:
     dependencies:

@@ -55,3 +55,14 @@ const fuseInstance = new Fuse(Registries, fuseConfig);
 export const getPaginatedSearch = (searchKeyword: string) => {
   return fuseInstance.search(searchKeyword);
 };
+
+export const getAllTags = () => {
+  const tagsSet = new Array();
+  Registries.map((item) =>
+    item.tags.map((tag) => {
+      if (!tagsSet.includes(tag)) tagsSet.push(tag);
+    }),
+  );
+
+  return tagsSet;
+};

@@ -11,7 +11,7 @@ type FeaturedCardsProps = {
   registry: RegistriesType;
 };
 
-const render = 4;
+const render = 3;
 
 export const FeaturedCards = ({ registry }: FeaturedCardsProps) => {
   return (

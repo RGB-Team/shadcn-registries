@@ -10,7 +10,7 @@ export default function Home() {
       id="main-content"
       className="max-w-2xl my-auto mx-auto flex flex-col justify-center"
     >
-      <section className="flex-1 flex flex-col items-center justify-center gap-4 mt-40">
+      <section className="flex-1 flex flex-col items-center justify-center gap-4 mt-40 2xl:mt-60">
         <h1
           className="text-center animate-fade-up text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           style={{

@@ -1,5 +1,3 @@
-"use client";
-
 import { CopyButton } from "./copy-button";
 import dynamic from "next/dynamic";
 import { Skeleton } from "@ui/skeleton";
