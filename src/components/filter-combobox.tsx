@@ -26,7 +26,6 @@ export function FilterCombobox({ tags }: FilterComboboxProps) {
   const searchParams = useSearchParams();
   const updateSearch = () => {
     const currentParams = new URLSearchParams(searchParams.toString());
-    const currentStacks = currentParams.getAll("stack");
 
     currentParams.delete("stack");
 

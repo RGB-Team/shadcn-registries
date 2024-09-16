@@ -14,10 +14,6 @@ export const FilterBar = async () => {
           <FilterCombobox tags={tags} />
         </Suspense>
         <TimeFilter />
-        <Button size={"sm"} className="gap-1.5 w-fit">
-          <FilterIcon className="size-4" />
-          <span className="text-base">filter</span>
-        </Button>
       </div>
       <div className="flex md:hidden flex-col w-full items-start md:items-center gap-2">
         <div className="flex items-center justify-between w-full">

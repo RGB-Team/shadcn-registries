@@ -8,6 +8,9 @@ import { cn, getPresetRange, PRESETS } from "@lib/utils";
 import { Button } from "@ui/button";
 import { Calendar } from "@ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@ui/popover";
+import { useRouter, useSearchParams } from "next/navigation";
+import { FilterIcon } from "lucide-react";
+import { ScrollArea } from "@ui/scroll-area";
 
 export function TimeFilter({
   className,
@@ -17,8 +20,43 @@ export function TimeFilter({
     to: addDays(new Date(), 0),
   });
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleDateFilter = () => {
+    const currentParams = new URLSearchParams(searchParams.toString());
+    const dateFrom = currentParams.get("from");
+    const dateTo = currentParams.get("to");
+
+    const newDateFrom =  date?.from ?? new Date();
+    const newDateTo =  date?.to ?? new Date();
+
+    if (dateFrom) {
+      currentParams.delete("from")
+      currentParams.set("from", format(newDateFrom , "yyyy-MM-dd"))
+    } else {
+      currentParams.set("from", format(newDateFrom , "yyyy-MM-dd"))
+    }
+
+    if (dateTo) {
+      currentParams.delete("to")
+      currentParams.set("to", format(newDateTo , "yyyy-MM-dd"))
+    } else {
+      currentParams.set("to", format(newDateTo , "yyyy-MM-dd"))
+    }
+
+    const newUrl = `?${currentParams.toString()}`;
+    router.push(newUrl);
+  };
+
+
+  const clearSearchParams = () => {
+    router.push("/registries");
+  };
+
+
   return (
-    <div className={cn("grid gap-2", className)}>
+    <div className={cn("flex items-center gap-2", className)}>
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -44,25 +82,32 @@ export function TimeFilter({
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0 flex gap-2" align="center">
-          <div className="flex flex-col space-y-2 p-2">
-            {PRESETS.map((item) => (
-              <Button
-                key={item.label}
-                className="h-8 px-2 text-sm"
-                variant={
-                  date?.from?.getDate() ===
-                  getPresetRange(item.name).from?.getDate()
-                    ? "default"
-                    : "secondary"
-                }
-                onClick={() => {
-                  setDate(getPresetRange(item.name));
-                }}
-              >
-                {item.label}
-              </Button>
-            ))}
+        <PopoverContent className="w-auto p-0 flex gap-2" align="end">
+          <div className="space-y-2 pl-3 py-2 pr-2 " >
+            <ScrollArea className="h-56 pr-3">
+              <div className="flex flex-col space-y-2">
+                {PRESETS.map((item) => (
+                  <Button
+                    key={item.label}
+                    className="h-8 px-2 text-sm"
+                    variant={
+                      date?.from?.getDate() ===
+                      getPresetRange(item.name).from?.getDate()
+                        ? "default"
+                        : "secondary"
+                    }
+                    onClick={() => {
+                      setDate(getPresetRange(item.name));
+                    }}
+                  >
+                    {item.label}
+                  </Button>
+                ))}
+              </div>
+            </ScrollArea>
+            <Button variant="secondary" onClick={clearSearchParams} >
+              Clear Date
+            </Button>
           </div>
           <Calendar
             className="pl-0"
@@ -77,6 +122,10 @@ export function TimeFilter({
           />
         </PopoverContent>
       </Popover>
+      <Button size={"sm"} className="gap-1.5 w-fit" onClick={handleDateFilter} >
+          <FilterIcon className="size-4" />
+          <span className="text-base">filter</span>
+      </Button>
     </div>
   );
 }

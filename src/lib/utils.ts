@@ -1,6 +1,15 @@
 import { clsx, type ClassValue } from "clsx";
 import { DateRange } from "react-day-picker";
 import { twMerge } from "tailwind-merge";
+import {
+  differenceInMinutes,
+  differenceInHours,
+  differenceInDays,
+  differenceInMonths,
+  differenceInYears,
+  differenceInWeeks,
+} from "date-fns";
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -19,6 +28,37 @@ export function formatDate(input: string | number): string {
     year: "numeric",
   });
 }
+
+export const formatPassedTime = (date: Date) => {
+  const now = new Date();
+
+  const minutes = differenceInMinutes(now, date);
+  const hours = differenceInHours(now, date);
+  const days = differenceInDays(now, date);
+  const weeks = differenceInWeeks(now , date)
+  const months = differenceInMonths(now, date);
+  const years = differenceInYears(now, date);
+
+  // Determine the appropriate time unit and format the string
+  let timeUntilString = "";
+  if (years > 0) {
+    timeUntilString = `${years} year${years > 1 ? "s" : ""} ago`;
+  } else if (months > 0) {
+    timeUntilString = `${months} month${months > 1 ? "s" : ""} ago`;
+  } else if (weeks >0) {
+    timeUntilString = `${weeks} week${weeks > 1 ? "s" : ""} ago`;
+  } else if (days > 0) {
+    timeUntilString = `${days} day${days > 1 ? "s" : ""} ago`;
+  } else if (hours > 0) {
+    timeUntilString = `${hours} hour${hours > 1 ? "s" : ""} ago`;
+  } else if (minutes > 0) {
+    timeUntilString = `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+  } else {
+    timeUntilString = "now";
+  }
+
+  return timeUntilString;
+};
 
 interface Preset {
   name: string;

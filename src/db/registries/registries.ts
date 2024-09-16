@@ -86,7 +86,7 @@ export const Registries = [
       "Material Icons",
     ],
     slug: "Otp-input-component",
-    createdAt: new Date(2024, 9, 15),
+    createdAt: new Date(2024, 8, 9),
     registry: {
       github_markdown:
         "https://raw.githubusercontent.com/BelkacemYerfa/test-shadcn-registres/refs/heads/dev/README.md",
@@ -183,7 +183,7 @@ export const Registries = [
       github_repo: "https://github.com/shadcn-ui/ui",
       repo_website: "https://ui.shadcn.com",
     },
-    createdAt: new Date(2024, 9, 14),
+    createdAt: new Date(2024, 8, 14),
     authors: [
       {
         name: "shadcn",
@@ -255,7 +255,7 @@ export const Registries = [
       "Feather Icons",
       "Material Icons",
     ],
-    createdAt: new Date(2024, 9, 11),
+    createdAt: new Date(2024, 8, 11),
     searchDescription:
       "this is a ui element made by shadcn and it is used as a testing resource",
 

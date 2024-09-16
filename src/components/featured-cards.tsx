@@ -6,6 +6,7 @@ import { FilterTags } from "./filter-tags";
 import { getPaginatedRegistries, getRecentlyAdded } from "@/db";
 import { Suspense } from "react";
 import { Skeleton } from "@ui/skeleton";
+import { formatPassedTime } from "@lib/utils";
 
 type FeaturedCardsProps = {
   registry: RegistriesType;
@@ -54,7 +55,9 @@ export const FeaturedCards = ({ registry }: FeaturedCardsProps) => {
           </div>
         </div>
         <div className="">
-          <p className="text-sm">3 days ago</p>
+          <p className="text-sm">
+            {formatPassedTime(registry.createdAt)}
+          </p>
         </div>
       </CardContent>
     </Card>
