@@ -64,6 +64,7 @@ export const RegistryCard = ({ registry }: RegistryCardProps) => {
             <Link
               target="_blank"
               href={author.url}
+              key={`author-${author.name}`}
               className="absolute group hover:z-[5] transition-all"
               style={{
                 right: `${idx * 28}px`,

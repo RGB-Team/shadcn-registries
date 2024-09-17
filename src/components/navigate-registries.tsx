@@ -24,6 +24,14 @@ export const NavigateRegistries = ({
     threshold: 1,
   });
 
+  const from = searchParams.get("from")
+  const to = searchParams.get("to")
+
+  const dateParams = from && to ? {
+    from,
+    to
+  } : undefined;
+
   const { status, data, isFetchingNextPage, fetchNextPage, refetch } =
     useInfiniteQuery({
       queryKey: ["registries"],
@@ -32,6 +40,7 @@ export const NavigateRegistries = ({
           pageParam.toString(),
           "5",
           searchParams.getAll("stack"),
+          dateParams
         );
         return response;
       },
@@ -60,7 +69,7 @@ export const NavigateRegistries = ({
 
   return (
     <>
-      {registries.map((item, itemIndex) => {
+      {registries.length > 0 ? registries.map((item, itemIndex) => {
         if (itemIndex === registries.length - 1) {
           return (
             <div key={item.slug} ref={ref}>
@@ -71,12 +80,16 @@ export const NavigateRegistries = ({
           );
         } else {
           return (
-            <Suspense fallback={<RegistryCardLoader />}>
-              <RegistryCard key={item.slug} registry={item} />
+            <Suspense key={item.slug} fallback={<RegistryCardLoader />}>
+              <RegistryCard registry={item} />
             </Suspense>
           );
         }
-      })}
+      }) : (
+        <div className="flex items-center justify-center text-2xl max-h-96 h-full">
+          No registries are been found in this particle filter
+        </div>
+      )}
 
       {isFetchingNextPage && <div>Loading more...</div>}
     </>

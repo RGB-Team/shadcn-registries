@@ -2,9 +2,9 @@
 
 import * as React from "react";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import { addDays, format } from "date-fns";
+import { addDays, endOfDay, format, isValid, parse, parseISO, startOfDay } from "date-fns";
 import { DateRange } from "react-day-picker";
-import { cn, getPresetRange, PRESETS } from "@lib/utils";
+import { cn, formatDate, getPresetRange, PRESETS } from "@lib/utils";
 import { Button } from "@ui/button";
 import { Calendar } from "@ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@ui/popover";
@@ -54,7 +54,23 @@ export function TimeFilter({
     router.push("/registries");
   };
 
+  React.useEffect(() => {
+    const fromParam = searchParams.get("from");
+    const toParam = searchParams.get("to");
 
+    const parseDate = (dateString: string | null): Date => {
+      if (!dateString) return new Date();
+
+      // Assuming the date format in URL is 'yyyy-MM-dd'
+      const parsedDate = parse(dateString, 'yyyy-MM-dd', new Date());
+      return isValid(parsedDate) ? parsedDate : new Date();
+    };
+
+    setDate({
+      from: startOfDay(parseDate(fromParam)),
+      to: endOfDay(parseDate(toParam)),
+    });
+  }, [searchParams]);
   return (
     <div className={cn("flex items-center gap-2", className)}>
       <Popover>
