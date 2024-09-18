@@ -1,12 +1,12 @@
 export const siteConfig = {
   name: "Shadcn Registries",
-  url: "",
-  ogImage: "",
+  url: "http://localhost:3000",
+  ogImage: "/assets/shadcn-registries",
   description:
     "Create, Extend, Share your custom themes with thousands of devs.",
   links: {
     twitter: "https://twitter.com/BylkaYf",
-    github: "",
+    github: "https://github.com/BelkacemYerfa/shadcn-registres",
   },
 };
 

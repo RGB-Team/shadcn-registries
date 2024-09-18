@@ -7,7 +7,7 @@ import { JsonPreview } from "@components/json-preview";
 import { CopyWrapper } from "@/components/copy-wrapper";
 import { getSingleRegistry } from "@/db";
 import { notFound } from "next/navigation";
-import axios from "axios";
+import { Metadata } from "next";
 
 type RegistryIdPgeProps = {
   params: {
@@ -15,18 +15,28 @@ type RegistryIdPgeProps = {
   };
 };
 
+export async function generateMetadata({
+  params: { registryId },
+}: RegistryIdPgeProps): Promise<Metadata> {
+  const registry = await getSingleRegistry(registryId);
+  if (!registry) notFound();
+  return {
+    title: registry.title,
+    description: registry.searchDescription,
+    authors: registry.authors,
+  };
+}
+
 export default async function RegistryIdPage({
   params: { registryId },
 }: RegistryIdPgeProps) {
   const registry = await getSingleRegistry(registryId);
   if (!registry) notFound();
-  const registry_code = await axios.get(registry.registry.github_registry);
-  if (!registry_code) notFound();
   return (
     <div className="relative h-full p-3 md:p-6 lg:p-10">
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="flex-1">
-          <Tabs defaultValue="markdown">
+          <Tabs defaultValue="markdown" className="space-y-5">
             <TabsList>
               <TabsTrigger value={"markdown"}>Markdown</TabsTrigger>
               <TabsTrigger value={"registry"}>Registry</TabsTrigger>
@@ -35,7 +45,10 @@ export default async function RegistryIdPage({
               <MarkDownReader url={registry.registry.github_markdown} />
             </TabsContent>
             <TabsContent value="registry">
-              <JsonPreview slug={registry.slug} data={registry_code.data} />
+              <JsonPreview
+                slug={registry.slug}
+                registry_link={registry.registry.github_registry}
+              />
             </TabsContent>
           </Tabs>
         </div>

@@ -19,6 +19,10 @@ export const getRecentlyAdded = () => {
   return Registries.reverse().slice(0, 5);
 };
 
+export const getAllRegistries = async () => {
+  return Registries;
+};
+
 export const getPaginatedRegistries = (
   page: string,
   limit: string = "10",

@@ -19,10 +19,10 @@ const mobile = "(max-width: 640px)";
 
 export const RegistryCard = ({ registry }: RegistryCardProps) => {
   const length = registry.tags.length;
-  const leftAuthor = registry.authors.length - 5;
-
   const isMobile = useMediaQuery(mobile);
   const render = isMobile ? 2 : 4;
+  const leftAuthor = registry.authors.length - render;
+
   return (
     <Card
       className={cn(
