@@ -7,13 +7,25 @@ import { JsonPreview } from "@components/json-preview";
 import { CopyWrapper } from "@/components/copy-wrapper";
 import { getSingleRegistry } from "@/db";
 import { notFound } from "next/navigation";
-import axios from "axios";
+import { Metadata } from "next";
 
 type RegistryIdPgeProps = {
   params: {
     registryId: string;
   };
 };
+
+export async function generateMetadata({
+  params: { registryId },
+}: RegistryIdPgeProps): Promise<Metadata> {
+  const registry = await getSingleRegistry(registryId);
+  if (!registry) notFound();
+  return {
+    title: registry.title,
+    description: registry.searchDescription,
+    authors: registry.authors,
+  };
+}
 
 export default async function RegistryIdPage({
   params: { registryId },

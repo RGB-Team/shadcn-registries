@@ -143,42 +143,42 @@ export const getPresetsName = (date: Date) => {
 
   // Check for "today"
   if (date.toDateString() === today.toDateString()) {
-    return "today"
+    return "today";
   }
 
   // Check for "yesterday"
   const yesterday = new Date(today);
   yesterday.setDate(yesterday.getDate() - 1);
   if (date.toDateString() === yesterday.toDateString()) {
-    return "yesterday"
+    return "yesterday";
   }
 
   // Check for "last7"
   const last7 = new Date(today);
   last7.setDate(last7.getDate() - 6);
   if (date >= last7 && date <= today) {
-    return "7 days ago"
+    return "7 days ago";
   }
 
   // Check for "last14"
   const last14 = new Date(today);
   last14.setDate(last14.getDate() - 13);
   if (date >= last14 && date <= today) {
-    return "14 days ago"
+    return "14 days ago";
   }
 
   // Check for "last30"
   const last30 = new Date(today);
   last30.setDate(last30.getDate() - 29);
   if (date >= last30 && date <= today) {
-    return "30 days ago"
+    return "30 days ago";
   }
 
   // Check for "thisWeek"
   const thisWeekStart = new Date(today);
   thisWeekStart.setDate(today.getDate() - today.getDay());
   if (date >= thisWeekStart && date <= today) {
-    return "thisWeek"
+    return "thisWeek";
   }
 
   // Check for "lastWeek"
@@ -187,19 +187,19 @@ export const getPresetsName = (date: Date) => {
   const lastWeekEnd = new Date(thisWeekStart);
   lastWeekEnd.setDate(lastWeekEnd.getDate() - 1);
   if (date >= lastWeekStart && date <= lastWeekEnd) {
-    return "lastWeek"
+    return "lastWeek";
   }
 
   // Check for "thisMonth"
   const thisMonthStart = new Date(today.getFullYear(), today.getMonth(), 1);
   if (date >= thisMonthStart && date <= today) {
-    return "thisMonth"
+    return "thisMonth";
   }
 
   // Check for "lastMonth"
   const lastMonthStart = new Date(today.getFullYear(), today.getMonth() - 1, 1);
   const lastMonthEnd = new Date(today.getFullYear(), today.getMonth(), 0);
   if (date >= lastMonthStart && date <= lastMonthEnd) {
-    return "lastMonth"
+    return "lastMonth";
   }
 };

@@ -121,7 +121,10 @@ export function TimeFilter({
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-2 md:p-0 flex flex-col md:flex-row gap-2" align="end">
+        <PopoverContent
+          className="w-auto p-2 md:p-0 flex flex-col md:flex-row gap-2"
+          align="end"
+        >
           {isDesktop ? (
             <Presets
               date={date}
@@ -131,7 +134,7 @@ export function TimeFilter({
           ) : (
             <Select>
               <SelectTrigger asChild>
-                <Button variant="outline" className="mx-1" >
+                <Button variant="outline" className="mx-1">
                   {getPresetsName(date?.from ?? new Date())}
                 </Button>
               </SelectTrigger>
