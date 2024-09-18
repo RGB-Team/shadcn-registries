@@ -20,10 +20,6 @@ export const FilterBar = async () => {
           <Suspense>
             <FilterCombobox tags={tags} />
           </Suspense>
-          <Button size={"sm"} className="gap-1.5 w-fit">
-            <FilterIcon className="size-4" />
-            <span className="text-base">filter</span>
-          </Button>
         </div>
         <TimeFilter />
       </div>

@@ -6,6 +6,7 @@ import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Icons } from "./icons";
+import { voteAction } from "@/actions/vote";
 
 export function CopyButton({
   content,
@@ -21,8 +22,10 @@ export function CopyButton({
   toastMessage?: string;
 }) {
   const [copied, setCopied] = useState(false);
+  const { execute } = useAction(voteAction);
 
   const handleCopy = () => {
+    if (slug) execute({ slug });
     navigator.clipboard.writeText(content);
     setCopied(true);
     toast(

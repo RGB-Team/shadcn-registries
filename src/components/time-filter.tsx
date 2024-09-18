@@ -2,7 +2,15 @@
 
 import * as React from "react";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import { addDays, endOfDay, format, isValid, parse, parseISO, startOfDay } from "date-fns";
+import {
+  addDays,
+  endOfDay,
+  format,
+  isValid,
+  parse,
+  parseISO,
+  startOfDay,
+} from "date-fns";
 import { DateRange } from "react-day-picker";
 import { cn, formatDate, getPresetRange, PRESETS } from "@lib/utils";
 import { Button } from "@ui/button";
@@ -28,30 +36,32 @@ export function TimeFilter({
     const dateFrom = currentParams.get("from");
     const dateTo = currentParams.get("to");
 
-    const newDateFrom =  date?.from ?? new Date();
-    const newDateTo =  date?.to ?? new Date();
+    const newDateFrom = date?.from ?? new Date();
+    const newDateTo = date?.to ?? new Date();
 
     if (dateFrom) {
-      currentParams.delete("from")
-      currentParams.set("from", format(newDateFrom , "yyyy-MM-dd"))
+      currentParams.delete("from");
+      currentParams.set("from", format(newDateFrom, "yyyy-MM-dd"));
     } else {
-      currentParams.set("from", format(newDateFrom , "yyyy-MM-dd"))
+      currentParams.set("from", format(newDateFrom, "yyyy-MM-dd"));
     }
 
     if (dateTo) {
-      currentParams.delete("to")
-      currentParams.set("to", format(newDateTo , "yyyy-MM-dd"))
+      currentParams.delete("to");
+      currentParams.set("to", format(newDateTo, "yyyy-MM-dd"));
     } else {
-      currentParams.set("to", format(newDateTo , "yyyy-MM-dd"))
+      currentParams.set("to", format(newDateTo, "yyyy-MM-dd"));
     }
 
     const newUrl = `?${currentParams.toString()}`;
     router.push(newUrl);
   };
 
-
   const clearSearchParams = () => {
-    router.push("/registries");
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.delete("from");
+    currentParams.delete("to");
+    router.refresh();
   };
 
   React.useEffect(() => {
@@ -62,7 +72,7 @@ export function TimeFilter({
       if (!dateString) return new Date();
 
       // Assuming the date format in URL is 'yyyy-MM-dd'
-      const parsedDate = parse(dateString, 'yyyy-MM-dd', new Date());
+      const parsedDate = parse(dateString, "yyyy-MM-dd", new Date());
       return isValid(parsedDate) ? parsedDate : new Date();
     };
 
@@ -72,7 +82,12 @@ export function TimeFilter({
     });
   }, [searchParams]);
   return (
-    <div className={cn("flex items-center gap-2", className)}>
+    <div
+      className={cn(
+        "flex flex-col md:flex-row md:items-center gap-2",
+        className,
+      )}
+    >
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -99,7 +114,7 @@ export function TimeFilter({
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0 flex gap-2" align="end">
-          <div className="space-y-2 pl-3 py-2 pr-2 " >
+          <div className="space-y-2 pl-3 py-2 pr-2 ">
             <ScrollArea className="h-56 pr-3">
               <div className="flex flex-col space-y-2">
                 {PRESETS.map((item) => (
@@ -121,7 +136,7 @@ export function TimeFilter({
                 ))}
               </div>
             </ScrollArea>
-            <Button variant="secondary" onClick={clearSearchParams} >
+            <Button variant="secondary" onClick={clearSearchParams}>
               Clear Date
             </Button>
           </div>
@@ -138,9 +153,9 @@ export function TimeFilter({
           />
         </PopoverContent>
       </Popover>
-      <Button size={"sm"} className="gap-1.5 w-fit" onClick={handleDateFilter} >
-          <FilterIcon className="size-4" />
-          <span className="text-base">filter</span>
+      <Button size={"sm"} className="gap-1.5 w-fit" onClick={handleDateFilter}>
+        <FilterIcon className="size-4" />
+        <span className="text-base">filter</span>
       </Button>
     </div>
   );

@@ -10,7 +10,6 @@ import {
   differenceInWeeks,
 } from "date-fns";
 
-
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -35,7 +34,7 @@ export const formatPassedTime = (date: Date) => {
   const minutes = differenceInMinutes(now, date);
   const hours = differenceInHours(now, date);
   const days = differenceInDays(now, date);
-  const weeks = differenceInWeeks(now , date)
+  const weeks = differenceInWeeks(now, date);
   const months = differenceInMonths(now, date);
   const years = differenceInYears(now, date);
 
@@ -45,7 +44,7 @@ export const formatPassedTime = (date: Date) => {
     timeUntilString = `${years} year${years > 1 ? "s" : ""} ago`;
   } else if (months > 0) {
     timeUntilString = `${months} month${months > 1 ? "s" : ""} ago`;
-  } else if (weeks >0) {
+  } else if (weeks > 0) {
     timeUntilString = `${weeks} week${weeks > 1 ? "s" : ""} ago`;
   } else if (days > 0) {
     timeUntilString = `${days} day${days > 1 ? "s" : ""} ago`;

@@ -140,7 +140,7 @@ export const SearchPopOver = () => {
                           );
                         }}
                       >
-                        <Avatar className="size-10" >
+                        <Avatar className="size-10">
                           <AvatarImage
                             src={registry.authors[0].avatar}
                             alt={registry.authors[0].name}
@@ -148,10 +148,14 @@ export const SearchPopOver = () => {
                             width={40}
                             className="rounded-xl"
                           />
-                          <AvatarFallback>{registry.authors[0].name.slice(0, 3)}</AvatarFallback>
+                          <AvatarFallback>
+                            {registry.authors[0].name.slice(0, 3)}
+                          </AvatarFallback>
                         </Avatar>
-                        <div  className="flex flex-col gap-y-1 items-start">
-                          <h3 className="text-sm capitalize">{registry.title}</h3>
+                        <div className="flex flex-col gap-y-1 items-start">
+                          <h3 className="text-sm capitalize">
+                            {registry.title}
+                          </h3>
                           <p className="text-gray-400 text-sm truncate max-w-full ">
                             {registry.searchDescription}
                           </p>
@@ -161,8 +165,6 @@ export const SearchPopOver = () => {
                   })}
                 </CommandGroup>
               )}
-
-
             </CommandList>
           </Command>
         </CredenzaContent>

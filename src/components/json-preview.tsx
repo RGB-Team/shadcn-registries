@@ -9,7 +9,7 @@ const ReactJson = dynamic(() => import("react-json-view"), {
   loading: () => <Skeleton className="max-h-96 bg-muted" />,
 });
 
-export const JsonPreview = ({ data }: { data: any }) => {
+export const JsonPreview = ({ data, slug }: { data: any; slug: string }) => {
   return (
     <div className="relative rounded-xl group">
       <ReactJson
@@ -22,7 +22,7 @@ export const JsonPreview = ({ data }: { data: any }) => {
         }}
       />
       <div className="absolute right-2 top-2 group-hover:flex hidden">
-        <CopyButton content={data} />
+        <CopyButton slug={slug} content={data} />
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ export default async function RegistryIdPage({
               <MarkDownReader url={registry.registry.github_markdown} />
             </TabsContent>
             <TabsContent value="registry">
-              <JsonPreview data={registry_code.data} />
+              <JsonPreview slug={registry.slug} data={registry_code.data} />
             </TabsContent>
           </Tabs>
         </div>
@@ -45,6 +45,7 @@ export default async function RegistryIdPage({
               <h3 className="">Installation Command</h3>
               <div className="w-full">
                 <CopyWrapper
+                  slug={registry.slug}
                   content={`npx shadcn@latest add ${registry.registry.github_registry}"`}
                 >
                   <code className="relative w-full text-sm rounded px-[0.5rem] py-3 bg-muted font-mono space-x-2 group cursor-pointer overflow-hidden flex items-center ">
@@ -84,7 +85,11 @@ export default async function RegistryIdPage({
               <h3>Made by</h3>
               <div className="flex items-center flex-wrap gap-2">
                 {registry.authors.map((author) => (
-                  <Link href={author.url} className="flex items-center gap-2">
+                  <Link
+                    key={`twitter-${author.name}`}
+                    href={author.url}
+                    className="flex items-center gap-2"
+                  >
                     <Avatar>
                       <AvatarImage
                         src={author.avatar}

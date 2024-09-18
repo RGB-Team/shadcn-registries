@@ -63,11 +63,15 @@ export function FilterCombobox({ tags }: FilterComboboxProps) {
           <MultiSelectorTrigger disableRender={true}>
             <MultiSelectorInput placeholder="Filter using tags..." />
           </MultiSelectorTrigger>
-          <ScrollArea className="flex-1">
+          <ScrollArea className="flex-1 pr-3">
             <MultiSelectorContent>
               <MultiSelectorList className="border-none p-0 bg-transparent shadow-none">
                 {tags.map((tag) => (
-                  <MultiSelectorItem key={`filter-item-${tag}`} value={tag} className="h-9 text-sm">
+                  <MultiSelectorItem
+                    key={`filter-item-${tag}`}
+                    value={tag}
+                    className="h-9 text-sm"
+                  >
                     {tag}
                   </MultiSelectorItem>
                 ))}

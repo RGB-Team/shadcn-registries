@@ -17,14 +17,22 @@ export default async function RegistriesPage({
   const tags = searchParams.stack as string | string[] | undefined;
   const from = searchParams.from as string | undefined;
   const to = searchParams.to as string | undefined;
-  const dateParams = from && to ? {
-    from,
-    to
-  } : undefined;
+  const dateParams =
+    from && to
+      ? {
+          from,
+          to,
+        }
+      : undefined;
   const tagsArray =
     typeof tags === "string" ? [tags] : Array.isArray(tags) ? tags : undefined;
 
-  const initialRegistries = await getPaginatedRegistries("1", "5", tagsArray , dateParams);
+  const initialRegistries = await getPaginatedRegistries(
+    "1",
+    "5",
+    tagsArray,
+    dateParams,
+  );
 
   return (
     <div className="space-y-6 py-3">

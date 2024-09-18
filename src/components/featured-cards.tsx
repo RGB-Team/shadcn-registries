@@ -3,10 +3,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@ui/avatar";
 import Link from "next/link";
 import { RegistriesType } from "@/db/registries/registries";
 import { FilterTags } from "./filter-tags";
-import { getPaginatedRegistries, getRecentlyAdded } from "@/db";
+import {
+  getPaginatedRegistries,
+  getRecentlyAdded,
+  getSingleRegistry,
+} from "@/db";
 import { Suspense } from "react";
 import { Skeleton } from "@ui/skeleton";
 import { formatPassedTime } from "@lib/utils";
+import { rankRegistries } from "@/actions/vote";
 
 type FeaturedCardsProps = {
   registry: RegistriesType;
@@ -55,9 +60,7 @@ export const FeaturedCards = ({ registry }: FeaturedCardsProps) => {
           </div>
         </div>
         <div className="">
-          <p className="text-sm">
-            {formatPassedTime(registry.createdAt)}
-          </p>
+          <p className="text-sm">{formatPassedTime(registry.createdAt)}</p>
         </div>
       </CardContent>
     </Card>
@@ -65,14 +68,18 @@ export const FeaturedCards = ({ registry }: FeaturedCardsProps) => {
 };
 
 export const MostUsed = async () => {
-  const most_used = await getPaginatedRegistries("1", "5");
+  const most_used = await rankRegistries();
   return (
     <div className="space-y-1.5">
       <h3 className="text-lg font-semibold">Most Used</h3>
       <div className="flex flex-col gap-y-2">
-        {most_used.data.map((item, idx) => (
-          <FeaturedCards registry={item} key={idx * 20} />
-        ))}
+        {most_used.map(async (item, idx) => {
+          const registry = await getSingleRegistry(item.slug);
+          if (!registry) return null;
+          return (
+            <FeaturedCards registry={registry} key={`most-user-${item.slug}`} />
+          );
+        })}
       </div>
     </div>
   );

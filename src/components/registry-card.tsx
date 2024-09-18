@@ -22,7 +22,7 @@ export const RegistryCard = ({ registry }: RegistryCardProps) => {
   const leftAuthor = registry.authors.length - 5;
 
   const isMobile = useMediaQuery(mobile);
-  const render = isMobile ? 3 : 4;
+  const render = isMobile ? 2 : 4;
   return (
     <Card
       className={cn(
@@ -60,7 +60,7 @@ export const RegistryCard = ({ registry }: RegistryCardProps) => {
           </div>
         </div>
         <div className="flex items-center flex-row-reverse gap-2 relative">
-          {registry.authors.slice(0, 4).map((author, idx) => (
+          {registry.authors.slice(0, render).map((author, idx) => (
             <Link
               target="_blank"
               href={author.url}
