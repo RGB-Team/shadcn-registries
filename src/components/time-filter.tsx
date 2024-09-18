@@ -61,7 +61,8 @@ export function TimeFilter({
     const currentParams = new URLSearchParams(searchParams.toString());
     currentParams.delete("from");
     currentParams.delete("to");
-    router.refresh();
+    const newUrl = `?${currentParams.toString()}`;
+    router.push(newUrl);
   };
 
   React.useEffect(() => {

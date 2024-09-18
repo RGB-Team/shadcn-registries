@@ -38,7 +38,10 @@ export function FilterCombobox({ tags }: FilterComboboxProps) {
   };
 
   const clearSearchParams = () => {
-    router.push("/registries");
+    const currentParams = new URLSearchParams(searchParams.toString());
+    currentParams.delete("stack");
+    const newUrl = `?${currentParams.toString()}`;
+    router.push(newUrl);
   };
 
   React.useEffect(() => {

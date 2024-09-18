@@ -11,6 +11,8 @@ import dynamic from "next/dynamic";
 import { Skeleton } from "@ui/skeleton";
 import axios from "axios";
 import { RegistriesType, Registry } from "@/db/registries/registries";
+import { useQuery } from "@tanstack/react-query";
+import { Button } from "./ui/button";
 
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -150,21 +152,24 @@ type MarkDownReaderProps = {
 };
 
 export const MarkDownReader = ({ url }: MarkDownReaderProps) => {
-  const [loading, setLoading] = React.useState(false);
-  const [markdown, setMarkDown] = React.useState();
+  const { isLoading, error, data , refetch , isFetching, isRefetching } = useQuery({
+    queryKey: ["markdown-registry"],
+    queryFn: async () => {
+      const registry_code = await axios.get(url);
+      return registry_code.data;
+    },
+  });
 
-  React.useEffect(() => {
-    const fetchMarkDown = async () => {
-      setLoading(true);
-      const markdown_code = await axios.get(url);
-      setMarkDown(markdown_code.data);
-      setLoading(false);
-    };
+  if (error) {
+    return (
+      <div className="h-fit md:h-96 flex flex-col gap-2 items-start md:items-center justify-center w-full">
+      Seems that we&apos;re facing an issue with this registry
+      <Button onClick={() => refetch()}>try again</Button>
+    </div>
+    );
+  }
 
-    fetchMarkDown();
-  }, [url]);
-
-  return loading ? (
+  return isLoading || isRefetching || isFetching  ? (
     <Skeleton className="h-96 bg-muted" />
   ) : (
     <ReactMarkdown
@@ -173,7 +178,7 @@ export const MarkDownReader = ({ url }: MarkDownReaderProps) => {
       className="p-2 pb-3"
       components={components}
     >
-      {markdown ?? ("" as string)}
+      {data ?? "" as string}
     </ReactMarkdown>
   );
 };
@@ -189,26 +194,30 @@ type CardMarkdownProps = {
 };
 
 export const CardMarkdown = ({ lib, id }: CardMarkdownProps) => {
-  const [loading, setLoading] = React.useState(false);
-  const [registry, setRegistry] = React.useState<any>();
-
-  React.useEffect(() => {
-    const fetchRegistry = async () => {
-      setLoading(true);
+  const { isLoading, error, data , isFetching, isRefetching , refetch } = useQuery({
+    queryKey: ["card-registry"],
+    queryFn: async () => {
       const registry_code = await axios.get(lib.github_registry);
-      setRegistry(registry_code.data);
-      setLoading(false);
-    };
+      return registry_code.data;
+    },
+  });
 
-    fetchRegistry();
-  }, [lib]);
-  return loading ? (
+  if (error) {
+    return (
+      <div className="h-fit md:h-96 flex flex-col gap-2 items-start md:items-center justify-center w-full">
+        Seems that we&apos;re facing an issue with this registry
+        <Button onClick={() => refetch()}>try again</Button>
+      </div>
+    );
+  }
+
+  return isLoading || isRefetching || isFetching ? (
     <Skeleton className="h-96 bg-muted" />
   ) : (
     <ScrollArea className="h-96 rounded-xl group">
       <div className="rounded-xl group">
         <ReactJson
-          src={registry}
+          src={data}
           theme="monokai"
           enableClipboard
           style={{
