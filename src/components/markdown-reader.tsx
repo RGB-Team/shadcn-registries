@@ -152,24 +152,25 @@ type MarkDownReaderProps = {
 };
 
 export const MarkDownReader = ({ url }: MarkDownReaderProps) => {
-  const { isLoading, error, data , refetch , isFetching, isRefetching } = useQuery({
-    queryKey: ["markdown-registry"],
-    queryFn: async () => {
-      const registry_code = await axios.get(url);
-      return registry_code.data;
-    },
-  });
+  const { isLoading, error, data, refetch, isFetching, isRefetching } =
+    useQuery({
+      queryKey: ["markdown-registry"],
+      queryFn: async () => {
+        const registry_code = await axios.get(url);
+        return registry_code.data;
+      },
+    });
 
   if (error) {
     return (
       <div className="h-fit md:h-96 flex flex-col gap-2 items-start md:items-center justify-center w-full">
-      Seems that we&apos;re facing an issue with this registry
-      <Button onClick={() => refetch()}>try again</Button>
-    </div>
+        Seems that we&apos;re facing an issue with this registry
+        <Button onClick={() => refetch()}>try again</Button>
+      </div>
     );
   }
 
-  return isLoading || isRefetching || isFetching  ? (
+  return isLoading || isRefetching || isFetching ? (
     <Skeleton className="h-96 bg-muted" />
   ) : (
     <ReactMarkdown
@@ -178,7 +179,7 @@ export const MarkDownReader = ({ url }: MarkDownReaderProps) => {
       className="p-2 pb-3"
       components={components}
     >
-      {data ?? "" as string}
+      {data ?? ("" as string)}
     </ReactMarkdown>
   );
 };
@@ -194,13 +195,14 @@ type CardMarkdownProps = {
 };
 
 export const CardMarkdown = ({ lib, id }: CardMarkdownProps) => {
-  const { isLoading, error, data , isFetching, isRefetching , refetch } = useQuery({
-    queryKey: ["card-registry"],
-    queryFn: async () => {
-      const registry_code = await axios.get(lib.github_registry);
-      return registry_code.data;
-    },
-  });
+  const { isLoading, error, data, isFetching, isRefetching, refetch } =
+    useQuery({
+      queryKey: ["card-registry"],
+      queryFn: async () => {
+        const registry_code = await axios.get(lib.github_registry);
+        return registry_code.data;
+      },
+    });
 
   if (error) {
     return (

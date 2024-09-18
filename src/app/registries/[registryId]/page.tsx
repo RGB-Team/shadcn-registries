@@ -24,7 +24,7 @@ export default async function RegistryIdPage({
     <div className="relative h-full p-3 md:p-6 lg:p-10">
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="flex-1">
-          <Tabs defaultValue="markdown" className="space-y-5" >
+          <Tabs defaultValue="markdown" className="space-y-5">
             <TabsList>
               <TabsTrigger value={"markdown"}>Markdown</TabsTrigger>
               <TabsTrigger value={"registry"}>Registry</TabsTrigger>

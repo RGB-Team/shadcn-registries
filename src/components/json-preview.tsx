@@ -19,13 +19,14 @@ export const JsonPreview = ({
   registry_link: string;
   slug: string;
 }) => {
-  const { isLoading, error, data, refetch , isRefetching , isFetching } = useQuery({
-    queryKey: ["full-registry"],
-    queryFn: async () => {
-      const registry_code = await axios.get(registry_link);
-      return registry_code.data;
-    },
-  });
+  const { isLoading, error, data, refetch, isRefetching, isFetching } =
+    useQuery({
+      queryKey: ["full-registry"],
+      queryFn: async () => {
+        const registry_code = await axios.get(registry_link);
+        return registry_code.data;
+      },
+    });
 
   if (error?.message) {
     return (
