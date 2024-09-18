@@ -2,21 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -25,6 +11,7 @@ body {
     text-wrap: balance;
   }
 }
+
 
 @layer base {
   :root {
@@ -53,6 +40,8 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --shiki-token-function : 275, 80%, 71%;
+    --shiki-token-string : 131, 43%, 57%;
   }
   .dark {
     --background: 0 0% 3.9%;
