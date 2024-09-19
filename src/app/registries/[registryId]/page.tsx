@@ -52,9 +52,9 @@ export default async function RegistryIdPage({
             </TabsContent>
           </Tabs>
         </div>
-        <div className="max-w-md w-full space-y-4 ">
-          <div className="space-y-8">
-            <div className="space-y-2">
+        <div className="max-w-full lg:max-w-md w-full space-y-4 ">
+          <div className="space-y-8 w-full">
+            <div className="space-y-2 w-full">
               <h3 className="">Installation Command</h3>
               <div className="w-full">
                 <CopyWrapper

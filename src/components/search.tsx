@@ -15,7 +15,7 @@ import { Button } from "./ui/button";
 import { Search } from "lucide-react";
 import { Credenza, CredenzaContent } from "@ui/credenza";
 import { useDebounce } from "@hooks/use-debounce";
-import { getPaginatedSearch } from "@/db";
+import { getPaginatedSearch, getRecommended } from "@/db";
 import { FuseResult } from "fuse.js";
 import { RegistriesType } from "@/db/registries/registries";
 import { Skeleton } from "./ui/skeleton";
@@ -60,7 +60,12 @@ export const SearchPopOver = () => {
   };
 
   useEffect(() => {
-    if (debouncedQuery.length === 0) setResult(null);
+    if (debouncedQuery.length === 0) {
+      startTransition(async () => {
+        const results = await getRecommended();
+        setResult(results);
+      });
+    };
 
     if (debouncedQuery.length > 0) {
       startTransition(async () => {
@@ -126,7 +131,7 @@ export const SearchPopOver = () => {
                   <Skeleton className="h-8 rounded-sm" />
                 </div>
               ) : (
-                <CommandGroup className="space-y-2">
+                <CommandGroup className="!space-y-2">
                   {results?.map((item) => {
                     const registry = item.item;
                     return (
@@ -156,7 +161,7 @@ export const SearchPopOver = () => {
                           <h3 className="text-sm capitalize">
                             {registry.title}
                           </h3>
-                          <p className="text-gray-400 text-sm truncate max-w-full ">
+                          <p className="text-gray-400 text-sm truncate max-w-[calc(100%-2rem)]">
                             {registry.searchDescription}
                           </p>
                         </div>
