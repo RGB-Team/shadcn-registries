@@ -52,8 +52,6 @@ export const Registries = [
       "Baseweb",
       "NextUI",
       "PrimeReact",
-
-      // Design Systems
       "Design Systems",
       "Storybook",
       "Atomic Design",
@@ -141,8 +139,6 @@ export const Registries = [
       "Baseweb",
       "NextUI",
       "PrimeReact",
-
-      // Design Systems
       "Design Systems",
       "Storybook",
       "Atomic Design",

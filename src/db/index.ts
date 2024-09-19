@@ -1,4 +1,4 @@
-import { Registries } from "./registries/registries";
+import { Registries, RegistriesType } from "./registries/registries";
 import {
   format,
   isAfter,
@@ -56,16 +56,9 @@ export const getPaginatedRegistries = (
     const fromDate = dataParams.from ? parseISO(dataParams.from) : null;
     const toDate = dataParams.to ? parseISO(dataParams.to) : null;
 
-    console.log(
-      "From Date:",
-      fromDate ? format(fromDate, "yyyy-MM-dd") : "Not set",
-    );
-
     targetRegistries = targetRegistries.filter((reg) => {
       const createdAt =
         reg.createdAt instanceof Date ? reg.createdAt : parseISO(reg.createdAt);
-
-      console.log("Item Created At:", format(createdAt, "yyyy-MM-dd"));
 
       let result = true;
 
@@ -117,3 +110,20 @@ export const getAllTags = () => {
 
   return tagsSet;
 };
+
+export const getRecommended = () => {
+  let recommended : {
+    item : RegistriesType,
+    refIndex : number
+  }[] = [];
+  while (recommended.length < 5) {
+    let random = Math.floor(Math.random() * Registries.length)
+    const item = {
+      item : Registries[random],
+      refIndex : random
+    };
+    if (!recommended.includes(item)) recommended.push(item)
+  }
+
+  return recommended
+}
