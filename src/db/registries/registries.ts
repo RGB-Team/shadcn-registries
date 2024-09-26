@@ -217,9 +217,9 @@ export const Registries = [
     createdAt: new Date(2024, 8, 26),
     registry: {
       github_markdown:
-        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/content/docs/smart-date-picker.mdx",
+        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/content/docs/smart-datetime-input.mdx",
       github_registry:
-        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/public/registry/smart-date-picker.json",
+        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/public/registry/smart-datetime-input.json",
       github_repo: "https://github.com/BelkacemYerfa/shadcn-extension",
       repo_website: "https://shadcn-extension.vercel.app",
     },

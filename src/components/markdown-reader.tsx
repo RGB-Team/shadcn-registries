@@ -163,7 +163,7 @@ type MarkDownReaderProps = {
 export const MarkDownReader = ({ url }: MarkDownReaderProps) => {
   const { isLoading, error, data, refetch, isFetching, isRefetching } =
     useQuery({
-      queryKey: ["markdown-registry"],
+      queryKey: [`markdown-registry-${url}`],
       queryFn: async () => {
         const registry_code = await axios.get(url);
         return registry_code.data;
@@ -206,7 +206,7 @@ type CardMarkdownProps = {
 export const CardMarkdown = ({ lib, id }: CardMarkdownProps) => {
   const { isLoading, error, data, isFetching, isRefetching, refetch } =
     useQuery({
-      queryKey: ["card-registry"],
+      queryKey: [`card-registry-${id}`],
       queryFn: async () => {
         const registry_code = await axios.get(lib.github_registry);
         return registry_code.data;

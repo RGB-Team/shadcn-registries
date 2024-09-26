@@ -21,7 +21,7 @@ export const JsonPreview = ({
 }) => {
   const { isLoading, error, data, refetch, isRefetching, isFetching } =
     useQuery({
-      queryKey: ["full-registry"],
+      queryKey: [`full-registry-${slug}`],
       queryFn: async () => {
         const registry_code = await axios.get(registry_link);
         return registry_code.data;
