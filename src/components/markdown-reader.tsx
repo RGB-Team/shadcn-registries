@@ -10,7 +10,7 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { Skeleton } from "@ui/skeleton";
 import axios from "axios";
-import { RegistriesType, Registry } from "@/db/registries/registries";
+import { Registry } from "@/db/registries/registries";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "./ui/button";
 
@@ -18,8 +18,8 @@ const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
       className={cn(
-        "font-heading mt-2 scroll-m-20 text-4xl font-bold",
-        className,
+        "mb-4 border-b pb-2 text-4xl font-semibold",
+        className
       )}
       {...props}
     />
@@ -27,8 +27,8 @@ const components = {
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
       className={cn(
-        "font-heading mt-12 scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0",
-        className,
+        "mt-8 mb-4 text-3xl font-semibold",
+        className
       )}
       {...props}
     />
@@ -36,8 +36,8 @@ const components = {
   h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       className={cn(
-        "font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
-        className,
+        "mt-6 mb-4 text-2xl font-semibold",
+        className
       )}
       {...props}
     />
@@ -45,8 +45,8 @@ const components = {
   h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h4
       className={cn(
-        "font-heading mt-8 scroll-m-20 text-lg font-semibold tracking-tight",
-        className,
+        "mt-6 mb-4 text-xl font-semibold",
+        className
       )}
       {...props}
     />
@@ -54,8 +54,8 @@ const components = {
   h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h5
       className={cn(
-        "mt-8 scroll-m-20 text-lg font-semibold tracking-tight",
-        className,
+        "mt-6 mb-4 text-lg font-semibold",
+        className
       )}
       {...props}
     />
@@ -63,36 +63,36 @@ const components = {
   h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h6
       className={cn(
-        "mt-8 scroll-m-20 text-base font-semibold tracking-tight",
-        className,
+        "mt-6 mb-4 text-base font-semibold",
+        className
       )}
       {...props}
     />
   ),
-  a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
+  a: ({ className, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
     <a
-      className={cn("font-medium underline underline-offset-4", className)}
+      className={cn("text-blue-600 hover:underline", className)}
       {...props}
     />
   ),
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p
-      className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}
+      className={cn("mb-4 leading-6", className)}
       {...props}
     />
   ),
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
-    <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />
+    <ul className={cn("mb-4 pl-8 list-disc", className)} {...props} />
   ),
   ol: ({ className, ...props }: React.HTMLAttributes<HTMLOListElement>) => (
-    <ol className={cn("my-6 ml-6 list-decimal", className)} {...props} />
+    <ol className={cn("mb-4 pl-8 list-decimal", className)} {...props} />
   ),
-  li: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-    <li className={cn("mt-2", className)} {...props} />
+  li: ({ className, ...props }: React.LiHTMLAttributes<HTMLLIElement>) => (
+    <li className={cn("mb-2", className)} {...props} />
   ),
-  blockquote: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
+  blockquote: ({ className, ...props }: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
-      className={cn("mt-6 border-l-2 pl-6 italic", className)}
+      className={cn("mb-4 pl-4 border-l-4 border-gray-300 italic", className)}
       {...props}
     />
   ),
@@ -102,36 +102,36 @@ const components = {
     ...props
   }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img className={cn("rounded-md", className)} alt={alt} {...props} />
+    <img className={cn("max-w-full rounded-md", className)} alt={alt} {...props} />
   ),
   hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
-    <hr className="my-4 md:my-8" {...props} />
+    <hr className="my-6 border-t border-gray-300" {...props} />
   ),
-  table: ({ className, ...props }: React.HTMLAttributes<HTMLTableElement>) => (
-    <div className="my-6 w-full overflow-y-auto">
-      <table className={cn("w-full", className)} {...props} />
+  table: ({ className, ...props }: React.TableHTMLAttributes<HTMLTableElement>) => (
+    <div className="mb-4 overflow-x-auto">
+      <table className={cn("min-w-full border-collapse", className)} {...props} />
     </div>
   ),
   tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
     <tr
-      className={cn("m-0 border-t p-0 even:bg-muted", className)}
+      className={cn("border-t", className)}
       {...props}
     />
   ),
-  th: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
+  th: ({ className, ...props }: React.ThHTMLAttributes<HTMLTableCellElement>) => (
     <th
       className={cn(
-        "border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right",
-        className,
+        "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider",
+        className
       )}
       {...props}
     />
   ),
-  td: ({ className, ...props }: React.HTMLAttributes<HTMLTableCellElement>) => (
+  td: ({ className, ...props }: React.TdHTMLAttributes<HTMLTableCellElement>) => (
     <td
       className={cn(
-        "border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right",
-        className,
+        "px-6 py-4 whitespace-nowrap text-sm",
+        className
       )}
       {...props}
     />
@@ -139,13 +139,22 @@ const components = {
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
       className={cn(
-        "relative rounded px-[0.3rem] bg-muted font-mono text-sm",
-        className,
+        "px-1.5 py-0.5 rounded font-mono text-sm",
+        className
       )}
       {...props}
     />
   ),
-};
+  pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
+    <pre
+      className={cn(
+        "mb-4 p-4 rounded bg-muted overflow-x-auto",
+        className
+      )}
+      {...props}
+    />
+  ),
+}
 
 type MarkDownReaderProps = {
   url: string;
