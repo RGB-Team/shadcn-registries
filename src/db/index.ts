@@ -16,7 +16,7 @@ export const getSingleRegistry = (registryId: string) => {
 };
 
 export const getRecentlyAdded = () => {
-  return Registries.reverse().slice(0, 5);
+  return Registries.reverse().slice(0, 4);
 };
 
 export const getAllRegistries = async () => {
@@ -112,7 +112,7 @@ export const getAllTags = () => {
 };
 
 export const getRecommended = () => {
-  let recommended : {
+  const recommended : {
     item : RegistriesType,
     refIndex : number
   }[] = [];

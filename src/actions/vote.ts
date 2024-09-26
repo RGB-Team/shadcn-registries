@@ -4,7 +4,7 @@ import { db } from "@/lib/turso";
 import { headers } from "next/headers";
 import { z } from "zod";
 import { actionClient } from "./safe";
-import { eq, and, sql, desc } from "drizzle-orm";
+import { eq, and, sql } from "drizzle-orm";
 import { slugStats, votes } from "@/lib/schema";
 
 export const voteAction = actionClient
@@ -65,6 +65,6 @@ export async function rankRegistries() {
     })
     .from(slugStats)
     .orderBy(slugStats.likes)
-    .limit(5);
+    .limit(4);
   return topSlugs;
 }
