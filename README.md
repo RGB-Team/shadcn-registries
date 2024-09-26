@@ -2,7 +2,6 @@
 
 This project allows you to create, share, and discover custom themes for shadcn components. By submitting a pull request to our GitHub repository, you can add your theme to the Registries array, making it available for others to use and explore.
 
-![hero](/public/og.png)
 
 ## How to Add Your Theme
 
