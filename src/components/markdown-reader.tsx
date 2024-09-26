@@ -13,73 +13,58 @@ import axios from "axios";
 import { Registry } from "@/db/registries/registries";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "./ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@ui/tooltip";
 
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
-      className={cn(
-        "mb-4 border-b pb-2 text-4xl font-semibold",
-        className
-      )}
+      className={cn("mb-4 border-b pb-2 text-4xl font-semibold", className)}
       {...props}
     />
   ),
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
-      className={cn(
-        "mt-8 mb-4 text-3xl font-semibold",
-        className
-      )}
+      className={cn("mt-8 mb-4 text-3xl font-semibold", className)}
       {...props}
     />
   ),
   h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
-      className={cn(
-        "mt-6 mb-4 text-2xl font-semibold",
-        className
-      )}
+      className={cn("mt-6 mb-4 text-2xl font-semibold", className)}
       {...props}
     />
   ),
   h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h4
-      className={cn(
-        "mt-6 mb-4 text-xl font-semibold",
-        className
-      )}
+      className={cn("mt-6 mb-4 text-xl font-semibold", className)}
       {...props}
     />
   ),
   h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h5
-      className={cn(
-        "mt-6 mb-4 text-lg font-semibold",
-        className
-      )}
+      className={cn("mt-6 mb-4 text-lg font-semibold", className)}
       {...props}
     />
   ),
   h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h6
-      className={cn(
-        "mt-6 mb-4 text-base font-semibold",
-        className
-      )}
+      className={cn("mt-6 mb-4 text-base font-semibold", className)}
       {...props}
     />
   ),
-  a: ({ className, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-    <a
-      className={cn("text-blue-600 hover:underline", className)}
-      {...props}
-    />
+  a: ({
+    className,
+    ...props
+  }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+    <a className={cn("text-blue-600 hover:underline", className)} {...props} />
   ),
   p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
-    <p
-      className={cn("mb-4 leading-6", className)}
-      {...props}
-    />
+    <p className={cn("mb-4 leading-6", className)} {...props} />
   ),
   ul: ({ className, ...props }: React.HTMLAttributes<HTMLUListElement>) => (
     <ul className={cn("mb-4 pl-8 list-disc", className)} {...props} />
@@ -90,7 +75,10 @@ const components = {
   li: ({ className, ...props }: React.LiHTMLAttributes<HTMLLIElement>) => (
     <li className={cn("mb-2", className)} {...props} />
   ),
-  blockquote: ({ className, ...props }: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
+  blockquote: ({
+    className,
+    ...props
+  }: React.BlockquoteHTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
       className={cn("mb-4 pl-4 border-l-4 border-gray-300 italic", className)}
       {...props}
@@ -102,59 +90,63 @@ const components = {
     ...props
   }: React.ImgHTMLAttributes<HTMLImageElement>) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img className={cn("max-w-full rounded-md", className)} alt={alt} {...props} />
+    <img
+      className={cn("max-w-full rounded-md", className)}
+      alt={alt}
+      {...props}
+    />
   ),
   hr: ({ ...props }: React.HTMLAttributes<HTMLHRElement>) => (
     <hr className="my-6 border-t border-gray-300" {...props} />
   ),
-  table: ({ className, ...props }: React.TableHTMLAttributes<HTMLTableElement>) => (
+  table: ({
+    className,
+    ...props
+  }: React.TableHTMLAttributes<HTMLTableElement>) => (
     <div className="mb-4 overflow-x-auto">
-      <table className={cn("min-w-full border-collapse", className)} {...props} />
+      <table
+        className={cn("min-w-full border-collapse", className)}
+        {...props}
+      />
     </div>
   ),
   tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
-    <tr
-      className={cn("border-t", className)}
-      {...props}
-    />
+    <tr className={cn("border-t", className)} {...props} />
   ),
-  th: ({ className, ...props }: React.ThHTMLAttributes<HTMLTableCellElement>) => (
+  th: ({
+    className,
+    ...props
+  }: React.ThHTMLAttributes<HTMLTableCellElement>) => (
     <th
       className={cn(
         "px-6 py-3 text-left text-xs font-medium uppercase tracking-wider",
-        className
+        className,
       )}
       {...props}
     />
   ),
-  td: ({ className, ...props }: React.TdHTMLAttributes<HTMLTableCellElement>) => (
+  td: ({
+    className,
+    ...props
+  }: React.TdHTMLAttributes<HTMLTableCellElement>) => (
     <td
-      className={cn(
-        "px-6 py-4 whitespace-nowrap text-sm",
-        className
-      )}
+      className={cn("px-6 py-4 whitespace-nowrap text-sm", className)}
       {...props}
     />
   ),
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
-      className={cn(
-        "px-1.5 py-0.5 rounded font-mono text-sm",
-        className
-      )}
+      className={cn("px-1.5 py-0.5 rounded font-mono text-sm", className)}
       {...props}
     />
   ),
   pre: ({ className, ...props }: React.HTMLAttributes<HTMLPreElement>) => (
     <pre
-      className={cn(
-        "mb-4 p-4 rounded bg-muted overflow-x-auto",
-        className
-      )}
+      className={cn("mb-4 p-4 rounded bg-muted overflow-x-auto", className)}
       {...props}
     />
   ),
-}
+};
 
 type MarkDownReaderProps = {
   url: string;
@@ -238,16 +230,45 @@ export const CardMarkdown = ({ lib, id }: CardMarkdownProps) => {
         />
       </div>
       <div className="absolute top-2 right-3 group-hover:flex flex-col items-center gap-2 hidden">
-        <ShareButton slug={`/registries/${id}`} />
-        <CopyButton
-          icon={"Terminal"}
-          content={"npx shadcn@latest " + lib.github_registry}
-        />
-        <CopyButton
-          toastMessage={"Copied to clipboard. Paste it, run it and enjoy."}
-          content={lib.github_registry}
-          slug={id}
-        />
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <ShareButton slug={`/registries/${id}`} />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Share</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <CopyButton
+                icon={"Terminal"}
+                content={"npx shadcn@latest add" + lib.github_registry}
+              />
+            </TooltipTrigger>
+            <TooltipContent side="right">
+              <p>command</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <CopyButton
+                toastMessage={
+                  "Copied to clipboard. Paste it, run it and enjoy."
+                }
+                content={lib.github_registry}
+                slug={id}
+              />
+            </TooltipTrigger>
+            <TooltipContent side="bottom">
+              <p>registry link</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
     </ScrollArea>
   );

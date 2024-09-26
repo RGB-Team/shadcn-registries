@@ -24,10 +24,9 @@ export type RegistriesType = {
 export const Registries = [
   {
     title: "breadcrumb",
-    searchDescription: "A component for detecting the path to the current page using links",
-    tags: [
-     "shadcn" , "react" , "radix-ui"
-    ],
+    searchDescription:
+      "A component for detecting the path to the current page using links",
+    tags: ["shadcn", "react", "radix-ui"],
     slug: "breadcrumb",
     createdAt: new Date(2024, 8, 26),
     registry: {
@@ -61,10 +60,9 @@ export const Registries = [
   },
   {
     title: "tree view",
-    searchDescription: "A tree view that assembles all the functionalities of the Accordion component to create a tree view",
-    tags: [
-     "shadcn" , "react" , "radix-ui" , "accordion"
-    ],
+    searchDescription:
+      "A tree view that assembles all the functionalities of the Accordion component to create a tree view",
+    tags: ["shadcn", "react", "radix-ui", "accordion"],
     slug: "tree-view",
     createdAt: new Date(2024, 8, 26),
     registry: {
@@ -98,10 +96,9 @@ export const Registries = [
   },
   {
     title: "carousel",
-    searchDescription: "This is a carousel component support all embla carousel features",
-    tags: [
-     "shadcn" , "react" , "embla-carousel"
-    ],
+    searchDescription:
+      "This is a carousel component support all embla carousel features",
+    tags: ["shadcn", "react", "embla-carousel"],
     slug: "carousel",
     createdAt: new Date(2024, 8, 26),
     registry: {
@@ -135,10 +132,9 @@ export const Registries = [
   },
   {
     title: "multi select",
-    searchDescription: "A mulit select that lets you select multiple items from a list.",
-    tags: [
-     "shadcn" , "react" , "radix-ui"
-    ],
+    searchDescription:
+      "A mulit select that lets you select multiple items from a list.",
+    tags: ["shadcn", "react", "radix-ui"],
     slug: "multi-select",
     createdAt: new Date(2024, 8, 26),
     registry: {
@@ -173,9 +169,7 @@ export const Registries = [
   {
     title: "otp input",
     searchDescription: "A simple validation input for OTP",
-    tags: [
-     "shadcn" , "react" , "react-otp-input"
-    ],
+    tags: ["shadcn", "react", "react-otp-input"],
     slug: "otp-input",
     createdAt: new Date(2024, 8, 26),
     registry: {
@@ -210,9 +204,7 @@ export const Registries = [
   {
     title: "smart date picker",
     searchDescription: "A natural language date and time input component",
-    tags: [
-     "shadcn" , "react" , "chrono-node"
-    ],
+    tags: ["shadcn", "react", "chrono-node"],
     slug: "smart-date-picker",
     createdAt: new Date(2024, 8, 26),
     registry: {
@@ -247,9 +239,7 @@ export const Registries = [
   {
     title: "datetime picker",
     searchDescription: "A customized datetime picker component",
-    tags: [
-     "shadcn" , "react" , "radix-ui"
-    ],
+    tags: ["shadcn", "react", "radix-ui"],
     slug: "datetime-picker",
     createdAt: new Date(2024, 8, 26),
     registry: {
@@ -284,9 +274,7 @@ export const Registries = [
   {
     title: "tags input",
     searchDescription: "A tags input that lets you set multiple options",
-    tags: [
-     "shadcn" , "react"
-    ],
+    tags: ["shadcn", "react"],
     slug: "tags-input",
     createdAt: new Date(2024, 8, 26),
     registry: {
@@ -321,9 +309,7 @@ export const Registries = [
   {
     title: "file upload",
     searchDescription: "an input component that allows file uploading",
-    tags: [
-     "react" , "react-dropzone" , "sonner"
-    ],
+    tags: ["react", "react-dropzone", "sonner"],
     slug: "file-upload",
     createdAt: new Date(2024, 8, 26),
     registry: {
