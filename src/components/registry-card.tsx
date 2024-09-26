@@ -82,9 +82,14 @@ export const RegistryCard = ({ registry }: RegistryCardProps) => {
             </Link>
           ))}
           {leftAuthor > 0 && (
-            <div className="size-10 rounded-full flex items-center justify-center z-20 bg-muted/80 absolute" style={{
-              right: `${(leftAuthor + 3) * 28}px`,
-            }}>+{leftAuthor}</div>
+            <div
+              className="size-10 rounded-full flex items-center justify-center z-20 bg-muted/80 absolute"
+              style={{
+                right: `${(leftAuthor + 3) * 28}px`,
+              }}
+            >
+              +{leftAuthor}
+            </div>
           )}
         </div>
       </CardFooter>

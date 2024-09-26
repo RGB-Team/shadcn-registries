@@ -65,7 +65,7 @@ export const SearchPopOver = () => {
         const results = await getRecommended();
         setResult(results);
       });
-    };
+    }
 
     if (debouncedQuery.length > 0) {
       startTransition(async () => {

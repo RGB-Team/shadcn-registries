@@ -112,18 +112,18 @@ export const getAllTags = () => {
 };
 
 export const getRecommended = () => {
-  const recommended : {
-    item : RegistriesType,
-    refIndex : number
+  const recommended: {
+    item: RegistriesType;
+    refIndex: number;
   }[] = [];
   while (recommended.length < 5) {
-    let random = Math.floor(Math.random() * Registries.length)
+    let random = Math.floor(Math.random() * Registries.length);
     const item = {
-      item : Registries[random],
-      refIndex : random
+      item: Registries[random],
+      refIndex: random,
     };
-    if (!recommended.includes(item)) recommended.push(item)
+    if (!recommended.includes(item)) recommended.push(item);
   }
 
-  return recommended
-}
+  return recommended;
+};
