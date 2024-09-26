@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Shadcn Registries",
-  url: "http://localhost:3000",
-  ogImage: "/oGimageSEO/shadcn-registries",
+  url: "https://shadcn-registries.vercel.app/",
+  ogImage: "https://shadcn-registries.vercel.app/og.png",
   description:
     "Create, Extend, Share your custom themes with thousands of devs.",
   links: {
