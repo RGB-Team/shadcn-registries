@@ -19,8 +19,8 @@ export default function Home() {
           }}
         >
           <Balancer>
-            <span className="text-muted-foreground">Create</span> your component
-            library
+            <span className="text-muted-foreground">Create</span> your custom
+            theme
           </Balancer>
         </h1>
         <span
