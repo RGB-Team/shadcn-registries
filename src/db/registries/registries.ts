@@ -32,7 +32,7 @@ export const Registries = [
     createdAt: new Date(2024, 8, 26),
     registry: {
       github_markdown:
-        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-registres/refs/heads/master/README.md",
+        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/content/docs/breadcrumb.mdx",
       github_registry:
         "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/public/registry/breadcrumb.json",
       github_repo: "https://github.com/BelkacemYerfa/shadcn-extension",
@@ -69,7 +69,7 @@ export const Registries = [
     createdAt: new Date(2024, 8, 26),
     registry: {
       github_markdown:
-        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-registres/refs/heads/master/README.md",
+        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/content/docs/tree-view.mdx",
       github_registry:
         "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/public/registry/tree-view.json",
       github_repo: "https://github.com/BelkacemYerfa/shadcn-extension",
@@ -106,7 +106,7 @@ export const Registries = [
     createdAt: new Date(2024, 8, 26),
     registry: {
       github_markdown:
-        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-registres/refs/heads/master/README.md",
+        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/content/docs/carousel.mdx",
       github_registry:
         "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/public/registry/carousel.json",
       github_repo: "https://github.com/BelkacemYerfa/shadcn-extension",
@@ -143,7 +143,7 @@ export const Registries = [
     createdAt: new Date(2024, 8, 26),
     registry: {
       github_markdown:
-        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-registres/refs/heads/master/README.md",
+        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/content/docs/multi-select.mdx",
       github_registry:
         "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/public/registry/multi-select.json",
       github_repo: "https://github.com/BelkacemYerfa/shadcn-extension",
@@ -180,7 +180,7 @@ export const Registries = [
     createdAt: new Date(2024, 8, 26),
     registry: {
       github_markdown:
-        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-registres/refs/heads/master/README.md",
+        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/content/docs/otp-input.mdx",
       github_registry:
         "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/public/registry/otp-input.json",
       github_repo: "https://github.com/BelkacemYerfa/shadcn-extension",
@@ -217,7 +217,7 @@ export const Registries = [
     createdAt: new Date(2024, 8, 26),
     registry: {
       github_markdown:
-        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-registres/refs/heads/master/README.md",
+        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/content/docs/smart-date-picker.mdx",
       github_registry:
         "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/public/registry/smart-date-picker.json",
       github_repo: "https://github.com/BelkacemYerfa/shadcn-extension",
@@ -254,7 +254,7 @@ export const Registries = [
     createdAt: new Date(2024, 8, 26),
     registry: {
       github_markdown:
-        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-registres/refs/heads/master/README.md",
+        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/content/docs/datetime-picker.mdx",
       github_registry:
         "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/public/registry/datetime-picker.json",
       github_repo: "https://github.com/BelkacemYerfa/shadcn-extension",
@@ -291,7 +291,7 @@ export const Registries = [
     createdAt: new Date(2024, 8, 26),
     registry: {
       github_markdown:
-        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-registres/refs/heads/master/README.md",
+        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/content/docs/tags-input.mdx",
       github_registry:
         "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/public/registry/tags-input.json",
       github_repo: "https://github.com/BelkacemYerfa/shadcn-extension",
@@ -328,7 +328,7 @@ export const Registries = [
     createdAt: new Date(2024, 8, 26),
     registry: {
       github_markdown:
-        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-registres/refs/heads/master/README.md",
+        "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/content/docs/file-upload.mdx",
       github_registry:
         "https://raw.githubusercontent.com/BelkacemYerfa/shadcn-extension/refs/heads/master/apps/extension/public/registry/file-upload.json",
       github_repo: "https://github.com/BelkacemYerfa/shadcn-extension",

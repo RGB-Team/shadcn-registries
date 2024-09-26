@@ -47,7 +47,7 @@ export default function Home() {
           </Link>
           <Link
             target="_blank"
-            href={"/github"}
+            href={"https://github.com/RGB-Team/shadcn-registres/pulls"}
             className={cn("gap-2", buttonVariants({ variant: "outline" }))}
           >
             Create One
