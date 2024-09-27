@@ -21,9 +21,6 @@ const render = 5;
 export default async function Image({
   params: { registryId },
 }: RegistryIdPgeProps) {
-  const interSemiBold = fetch(
-    new URL("@/app/fonts/GeistMonoVF.woff", import.meta.url),
-  ).then((res) => res.arrayBuffer());
 
   const registry = await getSingleRegistry(registryId);
   if (!registry) notFound();
@@ -37,73 +34,53 @@ export default async function Image({
         style={{
           height: "100%",
           width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
           backgroundColor: "#000",
           color: "#fff",
-          fontSize: "32px",
-          fontWeight: 600,
         }}
+        tw="flex items-center flex-col justify-center"
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "8px",
-          }}
-        >
-          <h3
-            style={{
-              display: "flex",
-              gap: "8px",
-            }}
-          >
-            <Icons.logo />
-            shadcn registries
-          </h3>
-          <div>
-            <h2
-              style={{
-                fontSize: "64px",
-                fontWeight: "700",
-              }}
-            >
-              {registry.title}
-            </h2>
-            <p>made by</p>
-            {registry.authors.slice(0, render).map((author, idx) => (
-              <div
-                key={`author-${author.name}`}
-                style={{
-                  position: "absolute",
-                  right: `${idx * 28}px`,
-                  transition: "all",
-                }}
+          <div tw="flex items-center justify-center flex-col space-2">
+            <div tw="flex items-center flex-col space-2" >
+              <h2
+                tw="text-4xl font-bold"
               >
-                <img
-                  src={author.avatar}
-                  alt={author.name}
-                  height={40}
-                  width={40}
-                />
-              </div>
-            ))}
-            {leftAuthor > 0 && (
-              <div
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  borderRadius: "9999px",
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                }}
-              >
-                +{leftAuthor}
-              </div>
-            )}
+                {registry.title}
+              </h2>
+              <p tw="text-xl font-medium" >
+                {registry.searchDescription}
+              </p>
+            </div>
+            <p tw="text-lg" >made by</p>
+            <div tw="flex items-center space-3 justify-center relative mt-2 w-20">
+              {registry.authors.slice(0, render).map((author, idx) => (
+                  <img
+                    style={{
+                      position : "absolute",
+                      right : `${idx * 28}px`
+                    }}
+                    key={`author-${author.name}`}
+                    src={author.avatar}
+                    alt={author.name}
+                    height={40}
+                    width={40}
+                    tw="rounded-full"
+                  />
+              ))}
+              {leftAuthor > 0 && (
+                <div
+                  tw="flex items-center justify-center absolute right-0"
+                  style={{
+                    height : 40,
+                    width : 40,
+                    borderRadius: "9999px",
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                  }}
+                >
+                  +{leftAuthor}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
       </div>
     ),
     // ImageResponse options
@@ -111,14 +88,6 @@ export default async function Image({
       // For convenience, we can re-use the exported opengraph-image
       // size config to also set the ImageResponse's width and height.
       ...size,
-      fonts: [
-        {
-          name: "Geist Mono",
-          data: await interSemiBold,
-          style: "normal",
-          weight: 400,
-        },
-      ],
     },
   );
 }
