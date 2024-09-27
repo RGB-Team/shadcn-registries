@@ -8,6 +8,7 @@ import { CopyWrapper } from "@/components/copy-wrapper";
 import { getSingleRegistry } from "@/db";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import { siteConfig } from "@/config/site-config";
 
 type RegistryIdPgeProps = {
   params: {
@@ -24,6 +25,20 @@ export async function generateMetadata({
     title: registry.title,
     description: registry.searchDescription,
     authors: registry.authors,
+    openGraph : {
+      type: "website",
+      url: `${siteConfig.url}/registries/${registryId}`,
+      locale: "en_US",
+      title: registry.title,
+      description: registry.searchDescription,
+      siteName: siteConfig.name,
+      images : [{
+        url : `${siteConfig.url}/registries/${registryId}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt : `registry slug ${registryId}`
+      }]
+    },
   };
 }
 
