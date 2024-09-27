@@ -6,7 +6,7 @@ export const siteConfig = {
     "Create, Extend, Share your custom themes with thousands of devs.",
   links: {
     twitter: "https://twitter.com/BylkaYf",
-    github: "https://github.com/BelkacemYerfa/shadcn-registres",
+    github: "https://github.com/RGB-Team/shadcn-registries",
   },
 };
 

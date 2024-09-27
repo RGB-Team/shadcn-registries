@@ -3,14 +3,15 @@ import { siteConfig } from "@/config/site-config";
 import { cn } from "@lib/utils";
 import Link from "next/link";
 import Balancer from "react-wrap-balancer";
+import { SiteFooter } from "@/components/layout/site-footer";
 
 export default function Home() {
   return (
     <main
       id="main-content"
-      className="max-w-2xl my-auto mx-auto flex flex-col justify-center"
+      className="max-w-2xl mx-auto flex-1 flex flex-col h-full"
     >
-      <section className="flex-1 flex flex-col items-center justify-center gap-4 mt-40 2xl:mt-60">
+      <section className="flex-1 flex flex-col items-center justify-center gap-4 h-full">
         <h1
           className="text-center animate-fade-up text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           style={{
@@ -54,6 +55,7 @@ export default function Home() {
           </Link>
         </div>
       </section>
+      <SiteFooter />
     </main>
   );
 }

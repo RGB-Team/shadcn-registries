@@ -58,11 +58,11 @@ export default function RootLayout({
     <ReactQueryWrapper>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)]`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)] flex flex-col min-h-screen supports-[min-h-[100dvh]]:min-h-[100dvh] scroll-smooth`}
         >
           <Provider>
             <SiteHeader />
-            <div className={`mx-auto 2xl:max-w-7xl `}>{children}</div>
+            {children}
             <Toaster />
           </Provider>
         </body>
