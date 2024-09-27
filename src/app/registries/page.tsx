@@ -35,7 +35,7 @@ export default async function RegistriesPage({
   );
 
   return (
-    <div className="space-y-6 py-3">
+    <div className="space-y-6 py-3 mx-auto 2xl:max-w-7xl w-full">
       <div className=" w-full rounded-lg px-6">
         <FilterBar />
       </div>

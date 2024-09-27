@@ -48,7 +48,7 @@ export default async function RegistryIdPage({
   const registry = await getSingleRegistry(registryId);
   if (!registry) notFound();
   return (
-    <div className="relative h-full p-3 md:p-6 lg:p-10">
+    <div className="relative h-full p-3 md:p-6 lg:p-10 2xl:max-w-7xl w-full">
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="flex-1">
           <Tabs defaultValue="markdown" className="space-y-5">
