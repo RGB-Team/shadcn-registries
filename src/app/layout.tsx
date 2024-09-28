@@ -58,7 +58,7 @@ export default function RootLayout({
     <ReactQueryWrapper>
       <html lang="en">
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)] flex flex-col min-h-screen supports-[min-h-[100dvh]]:min-h-[100dvh] scroll-smooth`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased font-[family-name:var(--font-geist-sans)] flex flex-col min-h-screen supports-[min-height:100dvh]:min-h-[100dvh] scroll-smooth`}
         >
           <Provider>
             <SiteHeader />
