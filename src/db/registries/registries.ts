@@ -341,4 +341,26 @@ export const Registries = [
       },
     ],
   },
+  {
+    title: "Payload Components",
+    searchDescription:
+      "MIT registry and CLI for installing wired Payload CMS blocks into Payload v3 and Next.js projects",
+    tags: ["shadcn", "react", "nextjs", "payloadcms"],
+    slug: "payload-components",
+    createdAt: new Date(2026, 5, 22),
+    registry: {
+      github_markdown:
+        "https://raw.githubusercontent.com/Ducksss/payload-components/main/README.md",
+      github_registry: "https://www.payload-components.xyz/r/hero-basic.json",
+      github_repo: "https://github.com/Ducksss/payload-components",
+      repo_website: "https://www.payload-components.xyz",
+    },
+    authors: [
+      {
+        name: "Ducksss",
+        url: "https://github.com/Ducksss",
+        avatar: "https://avatars.githubusercontent.com/u/58126222?v=4",
+      },
+    ],
+  },
 ] satisfies RegistriesType[];
